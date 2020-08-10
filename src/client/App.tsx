@@ -3,7 +3,7 @@ import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
 import './scss/app';
 
-import Form from './components/shared/Form';
+import Form from './components/public/Form';
 import Navbar from './components/shared/Navbar';
 import Jumbo from './components/shared/Jumbo';
 import Login from './components/admin/Login';

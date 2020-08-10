@@ -17,7 +17,7 @@ const Navbar: React.SFC<NavbarProps> = () => {
     }
 
     const logout = () => {
-        location.replace('/books')
+        location.replace('/form')
         // location.reload();
         ClearAccessToken();
         

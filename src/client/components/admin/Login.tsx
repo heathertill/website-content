@@ -12,7 +12,6 @@ const Login: React.SFC<LoginProps> = ({ history }) => {
     const [logStatus, setLogStatus] = useState(true);
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-        console.log('logStat', logStatus);
         e.preventDefault();
         let body = {
             email,
@@ -25,7 +24,6 @@ const Login: React.SFC<LoginProps> = ({ history }) => {
                 if (result.role) {
                     setLogStatus(true);
                     history.push('/');
-                    console.log('logStat2', logStatus)
                     location.reload();
                 }
             } else {
