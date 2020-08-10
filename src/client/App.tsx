@@ -1,35 +1,21 @@
 import * as React from 'react';
+import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
 import './scss/app';
 
-export default class App extends React.Component<IAppProps, IAppState> {
+import Form from './components/shared/Form'
 
-    constructor(props: IAppProps) {
-        super(props);
 
-        this.state = { name: null };
-    }
-
-    async componentWillMount() {
-        let r = await fetch('/api/hello');
-        let name = await r.json();
-        this.setState({ name })
-    }
-
-    render () {
-        return (
-            <main className="container">
-                <h1 className="covalence-blue">Hello {this.state.name}!</h1>
-                <h2></h2>
-            </main>
-        )
-    }
+const App: React.SFC<AppProps> = () => {
+    return ( 
+        <BrowserRouter>
+            <main>
+                <Switch>
+                    <Route exact path='/form' component={Form} />
+                </Switch>
+        </main>
+        </BrowserRouter>
+     );
 }
-
-interface IAppProps {
-
-}
-
-interface IAppState {
-    name: string;
-}
+ 
+export default App;
