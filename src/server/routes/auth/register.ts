@@ -10,12 +10,13 @@ router.post('/', async (req, res, next) => {
         let hash = HashPassword(req.body.password);
         let user = {
             email: req.body.email,
-            password: hash
+            password: hash,
+            role: 'client'
         }
         let result: any = await queries.Users.newUser(user);
         let token = await CreateToken({ userid: result });
         res.json({
-            role: 'guest',
+            role: 'client',
             userid: result[0],
             token
         })

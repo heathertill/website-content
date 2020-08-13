@@ -4,11 +4,11 @@ import { RouteComponentProps } from 'react-router-dom';
 import { json, User } from '../../utils/api';
 
 
-export interface FormProps extends RouteComponentProps {
+export interface ClientInfoProps extends RouteComponentProps {
     
 }
 
-const Form: React.SFC<FormProps> = ({history}) => {
+const ClientInfo: React.SFC<ClientInfoProps> = ({history}) => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -38,7 +38,6 @@ const Form: React.SFC<FormProps> = ({history}) => {
 
     return ( 
         <section>
-            <div>Hello from div</div>
             <form className="form-group"
             onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor="firstName">First Name</label>
@@ -62,4 +61,4 @@ const Form: React.SFC<FormProps> = ({history}) => {
     );
 }
 
-export default Form
+export default ClientInfo;
