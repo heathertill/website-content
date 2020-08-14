@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from './../../utils/api';
 
-export interface SiteInfoProps {
+export interface SiteInfoProps extends RouteComponentProps { }
 
-}
-
-const SiteInfo: React.SFC<SiteInfoProps> = () => {
+const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
 
     const [existingWeb, setExistingWeb] = useState('');
     const [exWebName, setExWebName] = useState('');
@@ -29,9 +28,17 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
             siteManager,
             updateFreq
         }
-
+        console.log('body', body)
         e.preventDefault();
+        try {
+            let newSiteInfo = await json('/api/siteInfo', 'POST', body);
+            if (newSiteInfo) {
+                history.push('/')
+            }
+        } catch (e) {
+            console.log(e);
 
+        }
     }
 
     const handleR = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +59,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
 
     return (
         <section>
-            <form className="form-group">
+            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <div>Do yoy have an existing website?</div>
                     <div className="form-check-inline" onChange={handleR}>
@@ -66,25 +73,28 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
                         {show ? <div>
                             <div>
                                 <label htmlFor="exWebName">Current URL:</label>
-                                <input type="text" className="form-control" />
+                                <input type="text" className="form-control" value={exWebName} 
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExWebName(e.target.value)}/>
                             </div>
                             <div>
                                 <label htmlFor="">Current Web hosting company:</label>
-                                <input type="text" className="form-control" />
+                                <input type="text" className="form-control" value={hostName}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHostName(e.target.value)} />
                             </div>
                             <div>
                                 <label htmlFor="">What is your domain name?</label>
-                                <input type="text" className="form-control" />
+                                <input type="text" className="form-control" value={domain}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDomain(e.target.value)} />
                             </div>
-
                         </div> : null}
                     </div>
                 </div>
                 <div>
                     {showDom ?
                         <div>
-                                <label htmlFor="">Do you have a domain name?</label>
-                                <input type="text" className="form-control" />
+                            <label htmlFor="">Do you have a domain name?</label>
+                            <input type="text" className="form-control" value={domain}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDomain(e.target.value)} />
                         </div>
                         : null}
                 </div>
@@ -98,6 +108,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
                         <input type="text" className="form-control" />
                     </div>
                 </div>
+                <button type="submit" className="btn btn-warning m-2">Submit</button>
             </form>
         </section>
     );

@@ -4,11 +4,13 @@ import * as knex from 'knex';
 import Users from './queries/users';
 import Tokens from './queries/tokens';
 import ClientInfo from './queries/clientInfo';
+import SiteInfo from './queries/siteInfo';
 
 export const connection = knex(config.knex);
 
 export default {
     Users,
     Tokens,
-    ClientInfo
+    ClientInfo,
+    SiteInfo
 }
