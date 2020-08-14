@@ -17,7 +17,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
     const [updateFreq, setUpdateFreq] = useState('');
     // const [radio, setRadio] = useState('');
     const [show, setShow] = useState(false);
-    const [showDom, setShowDom] = useState(true)
+    const [showDom, setShowDom] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFontElement>) => {
         let body = {
@@ -40,10 +40,13 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
             setExWebName('yes')
             setShow(true);
             setShowDom(false);
+            console.log(showDom)
         } else {
             setExWebName('no')
             setShow(false)
+
             setShowDom(true)
+            console.log(showDom)
         }
     }
 
@@ -80,7 +83,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
                 <div>
                     {showDom ?
                         <div>
-                                <label htmlFor="">Who will be managing your website?</label>
+                                <label htmlFor="">Do you have a domain name?</label>
                                 <input type="text" className="form-control" />
                         </div>
                         : null}
@@ -91,7 +94,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = () => {
                         <input type="text" className="form-control" />
                     </div>
                     <div>
-                        <label htmlFor="">How frequently do you intend to update your website</label>
+                        <label htmlFor="">How frequently do you intend to update your website?</label>
                         <input type="text" className="form-control" />
                     </div>
                 </div>
