@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from './../../utils/api';
 
+import DomainRadio from './DomainRadio'
+
 export interface SiteInfoProps extends RouteComponentProps { }
 
 const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
 
     const [existingWeb, setExistingWeb] = useState('');
-    const [exWebName, setExWebName] = useState('');
+    const [webName, setwebName] = useState('');
     // const [hosting, setHosting] = useState('');
     const [hostName, setHostName] = useState('');
     const [domain, setDomain] = useState('');
@@ -16,13 +18,13 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [updateFreq, setUpdateFreq] = useState('');
     // const [radio, setRadio] = useState('');
     const [show, setShow] = useState(false);
-    const [showDom, setShowDom] = useState(false)
+    const [showDom, setShowDom] = useState(false);
+    const [showDomName, setShowDomName] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         let body = {
             userid: User.userid,
-            existingWeb,
-            exWebName,
+            webName,
             hostName,
             domain,
             siteManager,
@@ -32,6 +34,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         e.preventDefault();
         try {
             let newSiteInfo = await json('/api/siteInfo', 'POST', body);
+            console.log('newSiteInfo', newSiteInfo)
             if (newSiteInfo) {
                 history.push('/')
             }
@@ -44,18 +47,25 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const handleWeb = (e: React.ChangeEvent<HTMLInputElement>) => {
         let radio = e.target.value
         if (radio === 'yes') {
-            setExWebName('yes')
             setShow(true);
             setShowDom(false);
-            console.log(showDom)
         } else {
-            setExWebName('no')
-            setShow(false)
-            setShowDom(true)
-            console.log(showDom)
+            setwebName('no')
+            setHostName('no')
+            setShowDom(true);
+            setShow(false);
         }
     }
 
+    const handleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let radio = e.target.value
+        if (radio === 'yes') {
+            setShowDomName(true)
+        } else {
+            setShowDomName(false)
+            setDomain('no')
+        }
+    }
 
     return (
         <section>
@@ -71,41 +81,49 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                     <div>
                         {show ? <div>
                             <div>
-                                <label htmlFor="exWebName">Current URL:</label>
-                                <input type="text" className="form-control" value={exWebName} 
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExWebName(e.target.value)}/>
+                                <label htmlFor="webName">Current URL:</label>
+                                <input type="text" className="form-control" value={webName}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setwebName(e.target.value)} />
                             </div>
                             <div>
                                 <label htmlFor="">Current Web hosting company:</label>
                                 <input type="text" className="form-control" value={hostName}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHostName(e.target.value)} />
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHostName(e.target.value)} />
                             </div>
                             <div>
                                 <label htmlFor="">What is your domain name?</label>
                                 <input type="text" className="form-control" value={domain}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDomain(e.target.value)} />
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDomain(e.target.value)} />
                             </div>
                         </div> : null}
                     </div>
                 </div>
-               */}
                 <div>
                     {showDom ?
                         <div>
-                            <label htmlFor="">Do you have a domain name?</label>
+                            <DomainRadio handlers={{ handleDomain }} />
+                        </div>
+                        : null}
+                </div>
+                <div>
+                    {showDomName ?
+                        <div>
+                            <label htmlFor="">What is your domain name?</label>
                             <input type="text" className="form-control" value={domain}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDomain(e.target.value)} />
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDomain(e.target.value)} />
                         </div>
                         : null}
                 </div>
                 <div>
                     <div>
                         <label htmlFor="">Who will be managing your website?</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" className="form-control"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteManager(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor="">How frequently do you intend to update your website?</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" className="form-control"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
                     </div>
                 </div>
                 <button type="submit" className="btn btn-warning m-2">Submit</button>

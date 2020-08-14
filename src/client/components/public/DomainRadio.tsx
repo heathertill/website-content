@@ -1,16 +1,18 @@
 import * as React from 'react';
 
 
-export interface RadioProps {
-    question: any,
-    function: any
+export interface DomainRadioProps {
+    handlers: {
+        handleDomain: any
+    };
+   
 }
 
-const Radio: React.SFC<RadioProps> = ({  }) => {
+const DomainRadio: React.SFC<DomainRadioProps> = ({ handlers }) => {
     return (
         <section>
-            <div>{question}</div>
-            <div className="form-check-inline" onChange={function}>
+            <div>Do you have a domain?</div>
+            <div className="form-check-inline" onChange={handlers.handleDomain}>
                 <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
                 <label htmlFor="existingWeb" className="form-check-label">Yes</label>
                 <input type="radio" className="form-check-input mx-2" value="no" name="choice" />
@@ -20,4 +22,4 @@ const Radio: React.SFC<RadioProps> = ({  }) => {
     );
 }
 
-export default Radio;
+export default DomainRadio;

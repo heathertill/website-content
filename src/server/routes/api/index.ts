@@ -12,6 +12,6 @@ const router = express.Router();
 router.use('/hello', helloRouter);
 router.use('/users', userRouter);
 router.use('/clientInfo', clientInfoRouter);
-router.use('/siteIfo', siteInfoRouter);
+router.use('/siteInfo', siteInfoRouter);
 
 export default router;

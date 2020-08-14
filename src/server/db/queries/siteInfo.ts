@@ -1,6 +1,6 @@
 import { connection as knex } from '../index';
 
-const newSiteInfo = (bookObject: any) => knex('books').insert(bookObject);
+const newSiteInfo = (siteObject: any) => knex('siteInfo').insert(siteObject);
 
 export default {
     newSiteInfo

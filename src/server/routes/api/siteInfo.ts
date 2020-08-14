@@ -4,6 +4,7 @@ import queries from '../../db';
 const router = Router();
 
 router.post('/', async (req, res, next) => {
+    console.log('siteInfo')
     let body = req.body;
     try {
         let newSiteInfo = await queries.SiteInfo.newSiteInfo(body);
