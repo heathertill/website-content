@@ -18,7 +18,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [show, setShow] = useState(false);
     const [showDom, setShowDom] = useState(false)
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFontElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         let body = {
             userid: User.userid,
             existingWeb,
@@ -41,7 +41,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         }
     }
 
-    const handleR = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleWeb = (e: React.ChangeEvent<HTMLInputElement>) => {
         let radio = e.target.value
         if (radio === 'yes') {
             setExWebName('yes')
@@ -51,24 +51,23 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         } else {
             setExWebName('no')
             setShow(false)
-
             setShowDom(true)
             console.log(showDom)
         }
     }
+
 
     return (
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <div>Do yoy have an existing website?</div>
-                    <div className="form-check-inline" onChange={handleR}>
+                    <div className="form-check-inline" onChange={handleWeb}>
                         <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
                         <label htmlFor="existingWeb" className="form-check-label">Yes</label>
                         <input type="radio" className="form-check-input mx-2" value="no" name="choice" />
                         <label htmlFor="existingWeb" className="form-check-label">No</label>
                     </div>
-                    <div></div>
                     <div>
                         {show ? <div>
                             <div>
@@ -89,6 +88,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                         </div> : null}
                     </div>
                 </div>
+               */}
                 <div>
                     {showDom ?
                         <div>
