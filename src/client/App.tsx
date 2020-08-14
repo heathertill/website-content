@@ -10,6 +10,7 @@ import Login from './components/admin/Login';
 import Register from './components/admin/Register';
 import Home from './components/public/Home';
 import SiteInfo from './components/public/SiteInfo';
+import BrandInfo from './components/public/BrandInfo';
 
 
 const App: React.SFC<AppProps> = () => {
@@ -25,6 +26,7 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/Login' component={Login} />
                     <Route exact path='/Register' component={Register} />
                     <Route exact path='/SiteInfo' component={SiteInfo} />
+                    <Route exact path='/BrandInfo' component={BrandInfo} />
                 </Switch>
         </main>
         </BrowserRouter>

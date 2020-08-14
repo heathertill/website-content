@@ -6,6 +6,7 @@ import helloRouter from './hello';
 import userRouter from './users';
 import clientInfoRouter from './clientInfo';
 import siteInfoRouter from './siteInfo';
+import brandInfoRouter from './brandInfo';
 
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.use('/hello', helloRouter);
 router.use('/users', userRouter);
 router.use('/clientInfo', clientInfoRouter);
 router.use('/siteInfo', siteInfoRouter);
+router.use('/brandInfo', brandInfoRouter);
 
 export default router;
