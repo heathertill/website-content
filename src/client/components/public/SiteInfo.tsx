@@ -3,20 +3,18 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from './../../utils/api';
 
-import DomainRadio from './DomainRadio'
+import DomainRadio from '../radio/DomainRadio';
+import WebRadio from '../radio/WebRadio';
 
 export interface SiteInfoProps extends RouteComponentProps { }
 
 const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
 
-    const [existingWeb, setExistingWeb] = useState('');
     const [webName, setwebName] = useState('');
-    // const [hosting, setHosting] = useState('');
     const [hostName, setHostName] = useState('');
     const [domain, setDomain] = useState('');
     const [siteManager, setSiteManager] = useState('');
     const [updateFreq, setUpdateFreq] = useState('');
-    // const [radio, setRadio] = useState('');
     const [show, setShow] = useState(false);
     const [showDom, setShowDom] = useState(false);
     const [showDomName, setShowDomName] = useState(false);
@@ -34,7 +32,6 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         e.preventDefault();
         try {
             let newSiteInfo = await json('/api/siteInfo', 'POST', body);
-            console.log('newSiteInfo', newSiteInfo)
             if (newSiteInfo) {
                 history.push('/')
             }
@@ -71,13 +68,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <div>Do yoy have an existing website?</div>
-                    <div className="form-check-inline" onChange={handleWeb}>
-                        <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
-                        <label htmlFor="existingWeb" className="form-check-label">Yes</label>
-                        <input type="radio" className="form-check-input mx-2" value="no" name="choice" />
-                        <label htmlFor="existingWeb" className="form-check-label">No</label>
-                    </div>
+                    <WebRadio handlers={{handleWeb}} />
                     <div>
                         {show ? <div>
                             <div>

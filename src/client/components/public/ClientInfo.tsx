@@ -38,8 +38,7 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({history}) => {
 
     return ( 
         <section>
-            <form className="form-group"
-            onSubmit={(e) => handleSubmit(e)}>
+            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor="firstName">First Name</label>
                 <input className="form-control" type="text" value={firstName} placeholder={firstName}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)} />

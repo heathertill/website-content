@@ -11,6 +11,9 @@ import Register from './components/admin/Register';
 import Home from './components/public/Home';
 import SiteInfo from './components/public/SiteInfo';
 import BrandInfo from './components/public/BrandInfo';
+import ClientInfoEdit from './components/edit/ClientInfoEdit';
+import SiteInfoEdit from './components/edit/SiteInfoEdit';
+import BrandInfoEdit from './components/edit/BrandInfoEdit';
 
 
 const App: React.SFC<AppProps> = () => {
@@ -27,6 +30,9 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/Register' component={Register} />
                     <Route exact path='/SiteInfo' component={SiteInfo} />
                     <Route exact path='/BrandInfo' component={BrandInfo} />
+                    <Route exact path='/ClientInfoEdit' component={ClientInfoEdit} />
+                    <Route exact path='/SiteInfoEdit' component={SiteInfoEdit} />
+                    <Route exact path='/BrandInfoEdit' component={BrandInfoEdit} />
                 </Switch>
         </main>
         </BrowserRouter>
