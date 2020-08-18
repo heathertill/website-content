@@ -27,10 +27,19 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                 if (site !== null) {
                     setShowEdit(true)
                     setWebName(site.webName),
-                        setHostName(site.hostName),
-                        setDomain(site.domain),
-                        setSiteManager(site.siteManager),
+                    setHostName(site.hostName),
+                    setDomain(site.domain),
+                    setSiteManager(site.siteManager),
                         setUpdateFreq(site.updateFreq)
+                    console.log(site.webName)
+                }
+                if (site.webName !== 'no') {
+                    console.log('ding')
+                    setShow(true)
+                }
+                if (site.domain !== 'no') {
+                    console.log('dong')
+                    setShowDomName(true)
                 }
             } catch (e) {
                 console.log(e)
