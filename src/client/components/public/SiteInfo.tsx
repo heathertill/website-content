@@ -27,10 +27,10 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                 if (site !== null) {
                     setShowEdit(true)
                     setWebName(site.webName),
-                    setHostName(site.hostName),
-                    setDomain(site.domain),
-                    setSiteManager(site.siteManager),
-                    setUpdateFreq(site.updateFreq)
+                        setHostName(site.hostName),
+                        setDomain(site.domain),
+                        setSiteManager(site.siteManager),
+                        setUpdateFreq(site.updateFreq)
                 }
             } catch (e) {
                 console.log(e)
@@ -88,7 +88,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <WebRadio handlers={{handleWeb}} />
+                    <WebRadio handlers={{ handleWeb }} />
                     <div>
                         {show ? <div>
                             <div>
@@ -128,19 +128,19 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                 <div>
                     <div>
                         <label htmlFor="">Who will be managing your website?</label>
-                        <input type="text" className="form-control"
+                        <input type="text" className="form-control" value={siteManager}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteManager(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor="">How frequently do you intend to update your website?</label>
-                        <input type="text" className="form-control"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
+                        <input type="text" className="form-control" value={updateFreq}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
                     </div>
                 </div>
-                {showEdit ? 
-                <button type="submit" className="btn btn-warning m-2">Edit</button>
-                :
-                <button type="submit" className="btn btn-warning m-2">Submit</button>
+                {showEdit ?
+                    <button type="submit" className="btn btn-warning m-2">Edit</button>
+                    :
+                    <button type="submit" className="btn btn-warning m-2">Submit</button>
                 }
             </form>
         </section>
