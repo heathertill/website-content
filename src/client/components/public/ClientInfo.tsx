@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { json, User } from '../../utils/api';
+import { wayToGo} from '../../utils/formService';
 
 
 export interface ClientInfoProps extends RouteComponentProps<{ id: string }> { }
@@ -58,7 +59,8 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
         else {
             try {
                 let editInfo = await json(`/api/clientInfo/${User.userid}`, 'PUT', body)
-            if (editInfo) {
+                if (editInfo) {
+                wayToGo('Client info has been edited!')
                 history.push('/')
             }
             } catch (e) {
