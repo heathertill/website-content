@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {RouteComponentProps} from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import LogoRadio from '../radio/LogoRadio';
 import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
@@ -34,48 +34,70 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
     const handleStyle = (e: React.ChangeEvent<HTMLInputElement>) => {
         let radio = e.target.value;
         if (radio === 'yes') {
-            
+            setShow(true);
         } else {
-            
+            setStandards('no');
+            setShow(false);
+        }
+    };
+
+    const handlePrint = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let radio = e.target.value;
+        if (radio === 'yes') {
+            console.log(show)
+        } else {
+
         }
     }
 
-    return ( 
+    return (
         <section>
-            <LogoRadio handlers={{handleLogo}} />
+            <LogoRadio handlers={{ handleLogo }} />
             <form action="" className="form-group">
-                <div>
+                <div className="my-4">
                     <label htmlFor="text">What style are you looking for? Professional, edgy, modern, calm, minimal, etc. </label>
                     <input type="text" className="form-control" value={style}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStyle(e.target.value) } />
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStyle(e.target.value)} />
                 </div>
-                <div>
+                <div className="my-4">
                     <label htmlFor="text">What is your color palette?</label>
                     <input type="text" className="form-control" value={color}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setColor(e.target.value)} />
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setColor(e.target.value)} />
                 </div>
-
-
-                <div>
+                <div className="my-4">
+                    <StyleRadio handlers={{ handleStyle }} />
+                    {show ?
+                        <div>
+                            <label htmlFor="text">Please give a brief discription of your brand standards.</label>
+                            <input type="text" className="form-control" value={standards}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFonts(e.target.value)} />
+                        </div>
+                        : null
+                    }
+                </div>
+                <div className="my-4">
+                    <PrintRadio handlers={{ handlePrint }} />
+                </div>
+                <div className="my-4">
                     <label htmlFor="text">What font style are you looking for? What fonts do you currently use?</label>
                     <input type="text" className="form-control" value={fonts}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFonts(e.target.value)} />
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFonts(e.target.value)} />
                 </div>
 
 
-                <div>
+                <div className="my-4">
                     <label htmlFor="text">List 3-5 websites you would like to use as inspiration for your own</label>
                     <input type="text" className="form-control" value={websites}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebsites(e.target.value)} />
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebsites(e.target.value)} />
                 </div>
-                <div>
+                <div className="my-4">
                     <label htmlFor="text">What do you like about these websites? What do you dislike about these or other websites?</label>
                     <input type="text" className="form-control" value={webLikesDis}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebLikesDis(e.target.value)} />
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebLikesDis(e.target.value)} />
                 </div>
             </form>
         </section>
-     );
+    );
 }
- 
+
 export default StyleInfo;
