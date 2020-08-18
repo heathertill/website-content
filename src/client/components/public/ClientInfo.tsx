@@ -14,14 +14,14 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
     const [workNumber, setWorkNumber] = useState('');
     const [cellNumber, setCellNumber] = useState('');
     const [email, setEmail] = useState('');
-    const [show, setShow] = useState(false);
+    const [editable, setEditable] = useState(false);
 
     const canEdit = async () => {
         if (User.userid) {
             try {
                 let client = await json(`/api/clientInfo/${User.userid}`)
                 if (client !== null) {
-                    setShow(true)
+                    setEditable(true)
                     setFirstName(client.firstName),
                     setLastName(client.lastName),
                     setWorkNumber(client.workNumber),
@@ -46,7 +46,7 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
             email
         }
         e.preventDefault();
-        if (show === false) {
+        if (editable === false) {
             try {
                 let newInfo = await json('/api/clientInfo', 'POST', body)
                 if (newInfo) {
@@ -87,7 +87,7 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
                 <label htmlFor="email">Email</label>
                 <input className="form-control" type="text" value={email} placeholder={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
-                {show ? 
+                {editable ? 
                 <button type="submit" className="btn btn-warning m-2">Edit</button>
                 :
                 <button type="submit" className="btn btn-warning m-2">Submit</button>

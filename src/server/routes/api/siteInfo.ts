@@ -12,7 +12,7 @@ router.get('/:id', async (req, res, next) => {
         console.log(e);
         res.sendStatus(500)
     }
-})
+});
 
 router.post('/', async (req, res, next) => {
     console.log('siteInfo')
@@ -26,5 +26,17 @@ router.post('/', async (req, res, next) => {
         res.sendStatus(500);
     }
 });
+
+router.put('/:id', async (req, res, next) => {
+    let id = req.params.id
+    let body = req.body;
+    try {
+        let editSiteInfo = await queries.SiteInfo.editSiteInfo(body, id)
+        res.json(editSiteInfo)
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500)
+    }
+})
 
 export default router;

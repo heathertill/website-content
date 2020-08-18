@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { User, json } from './../../utils/api';
+import { User, json } from '../../utils/api';
+import { wayToGo} from '../../utils/formService';
 
 import DomainRadio from '../radio/DomainRadio';
 import WebRadio from '../radio/WebRadio';
@@ -18,20 +19,19 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [show, setShow] = useState(false);
     const [showDom, setShowDom] = useState(false);
     const [showDomName, setShowDomName] = useState(false);
-    const [showEdit, setShowEdit] = useState(false);
+    const [editable, setEditable] = useState(false);
 
     const canEdit = async () => {
         if (User.userid) {
             try {
                 let site = await json(`/api/siteInfo/${User.userid}`)
                 if (site !== null) {
-                    setShowEdit(true)
+                    setEditable(true)
                     setWebName(site.webName),
                     setHostName(site.hostName),
                     setDomain(site.domain),
                     setSiteManager(site.siteManager),
-                        setUpdateFreq(site.updateFreq)
-                    console.log(site.webName)
+                    setUpdateFreq(site.updateFreq)
                 }
                 if (site.webName !== 'no') {
                     console.log('ding')
@@ -59,14 +59,25 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         }
         console.log('body', body)
         e.preventDefault();
-        try {
-            let newSiteInfo = await json('/api/siteInfo', 'POST', body);
-            if (newSiteInfo) {
-                history.push('/')
+        if (editable === false) {
+            try {
+                let newSiteInfo = await json('/api/siteInfo', 'POST', body);
+                if (newSiteInfo) {
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e);
             }
-        } catch (e) {
-            console.log(e);
-
+        } else {
+            try {
+                let editInfo = await json(`/api/siteInfo/${User.userid}`, 'PUT', body);
+                if (editInfo) {
+                    wayToGo('Site info has been edited!');
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e)
+            }
         }
     }
 
@@ -146,7 +157,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
                     </div>
                 </div>
-                {showEdit ?
+                {editable ?
                     <button type="submit" className="btn btn-warning m-2">Edit</button>
                     :
                     <button type="submit" className="btn btn-warning m-2">Submit</button>
