@@ -5,10 +5,11 @@ import SubmitEdit from '../../utils/submitEdit';
 import LogoRadio from '../radio/LogoRadio';
 import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
+import { User, json } from '../../utils/api';
 
 export interface StyleInfoProps extends RouteComponentProps { }
 
-const StyleInfo: React.SFC<StyleInfoProps> = () => {
+const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
 
     const [logo, setLogo] = useState('');
     const [style, setStyle] = useState('');
@@ -33,11 +34,9 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
     };
 
     const handleStyle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let radio = e.target.value;
-        if (radio === 'yes') {
-            console.log('show1', show)
+        let radioStyle = e.target.value;
+        if (radioStyle === 'yes') {
             setShow(true);
-            console.log('show2', show)
         } else {
             setStandards('no');
             setShow(false);
@@ -45,21 +44,49 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
     };
 
     const handlePrint = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let radio = e.target.value;
-        if (radio === 'yes') {
+        let radioPrint = e.target.value;
+        if (radioPrint === 'yes') {
             setPrintMaterial('yes')
         } else {
             setPrintMaterial('no')
         }
     }
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        let body = {
+            userid: User.userid,
+            logo,
+            style,
+            color,
+            standards,
+            printMaterial,
+            fonts,
+            photoService,
+            websites,
+            webLikesDis
+        }
+        e.preventDefault();
+        try {
+            let newStyleInfo = await json('/api/styleInfo', 'POST', body);
+            if (newStyleInfo) {
+                history.push('/')
+            }
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
     return (
         <section>
-            {/* <LogoRadio handlers={{ handleLogo }} /> */}
+            
+            <form  className="form-group" onSubmit={(e) => handleSubmit(e)} >
+
+                {/* <LogoRadio handlers={{ handleLogo }} /> */}
 
             <div className="my-4">
                     <div>Do you want to use a logo?</div>
-                <div className="form-check-inline" value={logo}
+                <div className="form-check-inline" 
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.value)}>
                         <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
                         <label htmlFor="existingWeb" className="form-check-label">Yes</label>
@@ -67,7 +94,6 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
                         <label htmlFor="existingWeb" className="form-check-label">No</label>
                     </div>
                 </div>
-            <form action="" className="form-group">
                 <div className="my-4">
                     <label htmlFor="text">What style are you looking for? Professional, edgy, modern, calm, minimal, etc. </label>
                     <input type="text" className="form-control" value={style}
