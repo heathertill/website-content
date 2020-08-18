@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
+import SubmitEdit from '../../utils/submitEdit';
 
 export interface BrandInfoProps extends RouteComponentProps { }
 
@@ -20,7 +21,6 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
             try {
                 let brand = await json(`/api/brandInfo/${User.userid}`)
                 if (brand !== null) {
-                    console.log('ding')
                     setEditable(true)
                     setPurpose(brand.purpose),
                     setAudience(brand.audience),
@@ -91,11 +91,7 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
                     <input type="text" className="form-control" value={greatness}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGreatness(e.target.value)} />
                 </div>
-                {editable ? 
-                <button type="submit" className="btn btn-warning m-2">Edit</button>
-                :
-                <button type="submit" className="btn btn-warning m-2">Submit</button>
-                }
+                <SubmitEdit editable />
             </form>
         </div>
 

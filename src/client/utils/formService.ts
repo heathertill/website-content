@@ -16,6 +16,8 @@ export const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, uri: str
     }
 };
 
+
+
 export const wayToGo = (message?: string, then?: any) => {
     Swal.fire({
         title: message,

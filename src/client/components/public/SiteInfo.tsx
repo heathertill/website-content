@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
 import { wayToGo} from '../../utils/formService';
-
+import SubmitEdit from '../../utils/submitEdit';
 import DomainRadio from '../radio/DomainRadio';
 import WebRadio from '../radio/WebRadio';
 
@@ -157,11 +157,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
                     </div>
                 </div>
-                {editable ?
-                    <button type="submit" className="btn btn-warning m-2">Edit</button>
-                    :
-                    <button type="submit" className="btn btn-warning m-2">Submit</button>
-                }
+                <SubmitEdit editable />
             </form>
         </section>
     );

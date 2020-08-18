@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { json, User } from '../../utils/api';
-import { wayToGo} from '../../utils/formService';
+import { wayToGo } from '../../utils/formService';
+import SubmitEdit from '../../utils/submitEdit';
 
 
 export interface ClientInfoProps extends RouteComponentProps<{ id: string }> { }
@@ -87,11 +88,7 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
                 <label htmlFor="email">Email</label>
                 <input className="form-control" type="text" value={email} placeholder={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
-                {editable ? 
-                <button type="submit" className="btn btn-warning m-2">Edit</button>
-                :
-                <button type="submit" className="btn btn-warning m-2">Submit</button>
-                }
+                <SubmitEdit editable />
             </form>
         </section>
     );
