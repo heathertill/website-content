@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { RouteComponentProps } from 'react-router-dom';
-
 export interface HomeProps { }
 
 const Home: React.SFC<HomeProps> = () => {
@@ -17,6 +15,9 @@ const Home: React.SFC<HomeProps> = () => {
             </div>
             <div>
                 <Link to={'/BrandInfo'} className="btn btn-warning m-2">Brand Info</Link>
+            </div>
+            <div>
+                <Link to={'/StyleInfo'} className="btn btn-warning m-2">Style Info</Link>
             </div>
         </section>
     );
