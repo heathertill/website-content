@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom'
 import SubmitEdit from '../../utils/submitEdit';
+import {wayToGo} from '../../utils/formService';
 import LogoRadio from '../radio/LogoRadio';
 import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
@@ -38,11 +39,9 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
                     setFonts(getStyle.fonts),
                     setPhotoService(getStyle.photoService),
                     setWebsites(getStyle.websites),
-                    setWebLikesDis(getStyle.webLikesDis),
-                    // setFeatures(getStyle.features),
+                    setWebLikesDis(getStyle.webLikesDis)
 
-                }
-                if (getStyle.standards !== 'no') {
+                } if (getStyle.standards !== 'no') {
                     setShow(true)
                 }
             } catch (e) {
@@ -106,7 +105,11 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
             }
         } else {
             try {
-                
+                let editStyleInfo = await json(`/api/styleInfo/${User.userid}`, 'PUT', body)
+                if (editStyleInfo) {
+                    wayToGo('Style info has been edited');
+                    history.push('/')
+                }
             } catch (e) {
                 console.log(e)
             }

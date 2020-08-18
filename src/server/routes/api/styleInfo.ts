@@ -3,6 +3,17 @@ import queries from '../../db';
 
 const router = Router();
 
+router.get('/:id', async (req, res, next) => {
+    let id = req.params.id;
+    try {
+        let [styleInfo] = await queries.StyleInfo.getStyleInfo(id);
+        res.json(styleInfo)
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500)
+    }
+})
+
 router.post('/', async (req, res, next) => {
     let body = req.body;
     try {
@@ -19,7 +30,8 @@ router.put('/:id', async (req, res, next) => {
     let id = req.params.id;
     let body = req.body;
     try {
-        let [editStyleInfo] = await queries.StyleInfo.editStyleInfo(body, id)
+        let editStyleInfo = await queries.StyleInfo.editStyleInfo(body, id);
+        res.json(editStyleInfo)
     } catch (e) {
         console.log(e);
         res.sendStatus(500)
