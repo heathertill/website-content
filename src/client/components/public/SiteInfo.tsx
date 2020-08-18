@@ -10,7 +10,7 @@ export interface SiteInfoProps extends RouteComponentProps { }
 
 const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
 
-    const [webName, setwebName] = useState('');
+    const [webName, setWebName] = useState('');
     const [hostName, setHostName] = useState('');
     const [domain, setDomain] = useState('');
     const [siteManager, setSiteManager] = useState('');
@@ -18,6 +18,26 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [show, setShow] = useState(false);
     const [showDom, setShowDom] = useState(false);
     const [showDomName, setShowDomName] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+
+    const canEdit = async () => {
+        if (User.userid) {
+            try {
+                let site = await json(`/api/siteInfo/${User.userid}`)
+                if (site !== null) {
+                    setShowEdit(true)
+                    setWebName(site.webName),
+                    setHostName(site.hostName),
+                    setDomain(site.domain),
+                    setSiteManager(site.siteManager),
+                    setUpdateFreq(site.updateFreq)
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
+    useEffect(() => { canEdit() }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         let body = {
@@ -47,7 +67,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             setShow(true);
             setShowDom(false);
         } else {
-            setwebName('no')
+            setWebName('no')
             setHostName('no')
             setShowDom(true);
             setShow(false);
@@ -74,7 +94,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                             <div>
                                 <label htmlFor="webName">Current URL:</label>
                                 <input type="text" className="form-control" value={webName}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setwebName(e.target.value)} />
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebName(e.target.value)} />
                             </div>
                             <div>
                                 <label htmlFor="">Current Web hosting company:</label>
@@ -117,7 +137,11 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
                     </div>
                 </div>
+                {showEdit ? 
+                <button type="submit" className="btn btn-warning m-2">Edit</button>
+                :
                 <button type="submit" className="btn btn-warning m-2">Submit</button>
+                }
             </form>
         </section>
     );
