@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
 
@@ -13,6 +13,29 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
     const [siteAction, setSiteAction] = useState('');
     const [tagline, setTagline] = useState('');
     const [greatness, setGreatness] = useState('');
+    const [editable, setEditable] = useState(false);
+
+    const canEdit = async () => {
+        if (User.userid) {
+            try {
+                let brand = await json(`/api/brandInfo/${User.userid}`)
+                if (brand !== null) {
+                    console.log('ding')
+                    setEditable(true)
+                    setPurpose(brand.purpose),
+                    setAudience(brand.audience),
+                    setCompetition(brand.competition),
+                    setSiteAction(brand.siteAction),
+                    setTagline(brand.tagline),
+                    setGreatness(brand.greatness)
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
+
+    useEffect(() => { canEdit() }, [])
 
     const handleBrand = async (e: React.FormEvent<HTMLFormElement>) => {
         let body = {
@@ -27,9 +50,9 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
         e.preventDefault();
         try {
             let newBrandInfo = await json('/api/brandInfo', 'POST', body)
-if (newBrandInfo) {
-    history.push('/')
-}
+            if (newBrandInfo) {
+                history.push('/')
+            }
         } catch (e) {
             console.log(e)
         }
@@ -40,35 +63,39 @@ if (newBrandInfo) {
             <form className="form-group" onSubmit={(e) => handleBrand(e)} >
                 <div>
                     <label htmlFor="purpose">What is the purpose of your website?</label>
-                    <input type="text" className="form-control"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPurpose(e.target.value)} />
+                    <input type="text" className="form-control" value={purpose}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPurpose(e.target.value)} />
                 </div>
                 <div >
                     <label htmlFor="audience">Who is your target audience? (Age, industry, income, geographical area, etc.)</label>
-                    <input type="text" className="form-control"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAudience(e.target.value)} />
+                    <input type="text" className="form-control" value={audience}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAudience(e.target.value)} />
                 </div>
                 <div>
                     <label htmlFor="competition">Who is your direct competition?</label>
-                    <input type="text" className="form-control"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCompetition(e.target.value)} />
+                    <input type="text" className="form-control" value={competition}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCompetition(e.target.value)} />
                 </div>
                 <div>
                     <label htmlFor="siteAction">When people visit your website, what do you want them to do? `(Hire your service, join your company, communicate with you, be entertained, etc.)`</label>
-                    <input type="text" className="form-control"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteAction(e.target.value)} />
+                    <input type="text" className="form-control" value={siteAction}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteAction(e.target.value)} />
                 </div>
                 <div>
                     <label htmlFor="tagline">Tag line - Describe your business in one short sentence. What is your business/website about?</label>
-                    <input type="text" className="form-control"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTagline(e.target.value)} />
+                    <input type="text" className="form-control" value={tagline}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTagline(e.target.value)} />
                 </div>
                 <div>
                     <label htmlFor="greatness">What is great about your service?</label>
-                    <input type="text" className="form-control"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGreatness(e.target.value)} />
+                    <input type="text" className="form-control" value={greatness}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGreatness(e.target.value)} />
                 </div>
+                {editable ? 
+                <button type="submit" className="btn btn-warning m-2">Edit</button>
+                :
                 <button type="submit" className="btn btn-warning m-2">Submit</button>
+                }
             </form>
         </div>
 

@@ -6,7 +6,7 @@ const router = Router();
 router.get('/:id', async (req, res, next) => {
     let id = req.params.id;
     try {
-        let [client] = await queries.ClientInfo.oneClient(id);
+        let [client] = await queries.ClientInfo.getClientInfo(id);
         res.json(client)
     } catch (e) {
         console.log(e);
