@@ -24,6 +24,34 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
     const [editable, setEditable] = useState(false);
     const [show, setShow] = useState(false);
 
+    const canEdit = async () => {
+        if (User.userid) {
+            try {
+                let getStyle = await json(`/api/styleInfo/${User.userid}`)
+                if (getStyle !== null) {
+                    setEditable(true)
+                    setLogo(getStyle.logo),
+                    setStyle(getStyle.style),
+                    setColor(getStyle.color),
+                    setStandards(getStyle.standards),
+                    setPrintMaterial(getStyle.printMaterial),
+                    setFonts(getStyle.fonts),
+                    setPhotoService(getStyle.photoService),
+                    setWebsites(getStyle.websites),
+                    setWebLikesDis(getStyle.webLikesDis),
+                    // setFeatures(getStyle.features),
+
+                }
+                if (getStyle.standards !== 'no') {
+                    setShow(true)
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
+    useEffect(() => { canEdit() }, [])
+
     const handleLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
         let radio = e.target.value
         if (radio === 'yes') {
@@ -67,13 +95,21 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
         }
         console.log(body)
         e.preventDefault();
-        try {
-            let newStyleInfo = await json('/api/styleInfo', 'POST', body);
-            if (newStyleInfo) {
-                history.push('/')
+        if (editable === false) {
+            try {
+                let newStyleInfo = await json('/api/styleInfo', 'POST', body);
+                if (newStyleInfo) {
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e)
             }
-        } catch (e) {
-            console.log(e)
+        } else {
+            try {
+                
+            } catch (e) {
+                console.log(e)
+            }
         }
 
     }

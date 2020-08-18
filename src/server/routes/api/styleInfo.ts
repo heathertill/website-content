@@ -13,6 +13,17 @@ router.post('/', async (req, res, next) => {
         console.log(e);
         res.sendStatus(500)
     }
+});
+
+router.put('/:id', async (req, res, next) => {
+    let id = req.params.id;
+    let body = req.body;
+    try {
+        let [editStyleInfo] = await queries.StyleInfo.editStyleInfo(body, id)
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500)
+    }
 })
 
 
