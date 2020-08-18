@@ -65,6 +65,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
             websites,
             webLikesDis
         }
+        console.log(body)
         e.preventDefault();
         try {
             let newStyleInfo = await json('/api/styleInfo', 'POST', body);

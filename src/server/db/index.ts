@@ -6,6 +6,7 @@ import Tokens from './queries/tokens';
 import ClientInfo from './queries/clientInfo';
 import SiteInfo from './queries/siteInfo';
 import BrandInfo from './queries/brandInfo';
+import StyleInfo from './queries/styleInfo';
 
 export const connection = knex(config.knex);
 
@@ -14,5 +15,6 @@ export default {
     Tokens,
     ClientInfo,
     SiteInfo,
-    BrandInfo
+    BrandInfo,
+    StyleInfo
 }
