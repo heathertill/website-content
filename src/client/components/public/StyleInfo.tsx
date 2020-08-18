@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom'
+import SubmitEdit from '../../utils/submitEdit';
 import LogoRadio from '../radio/LogoRadio';
 import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
@@ -34,7 +35,9 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
     const handleStyle = (e: React.ChangeEvent<HTMLInputElement>) => {
         let radio = e.target.value;
         if (radio === 'yes') {
+            console.log('show1', show)
             setShow(true);
+            console.log('show2', show)
         } else {
             setStandards('no');
             setShow(false);
@@ -44,15 +47,26 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
     const handlePrint = (e: React.ChangeEvent<HTMLInputElement>) => {
         let radio = e.target.value;
         if (radio === 'yes') {
-            console.log(show)
+            setPrintMaterial('yes')
         } else {
-
+            setPrintMaterial('no')
         }
     }
 
     return (
         <section>
-            <LogoRadio handlers={{ handleLogo }} />
+            {/* <LogoRadio handlers={{ handleLogo }} /> */}
+
+            <div className="my-4">
+                    <div>Do you want to use a logo?</div>
+                <div className="form-check-inline" value={logo}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.value)}>
+                        <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
+                        <label htmlFor="existingWeb" className="form-check-label">Yes</label>
+                        <input type="radio" className="form-check-input mx-2" value="no" name="choice" />
+                        <label htmlFor="existingWeb" className="form-check-label">No</label>
+                    </div>
+                </div>
             <form action="" className="form-group">
                 <div className="my-4">
                     <label htmlFor="text">What style are you looking for? Professional, edgy, modern, calm, minimal, etc. </label>
@@ -83,6 +97,15 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
                     <input type="text" className="form-control" value={fonts}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFonts(e.target.value)} />
                 </div>
+                <div className="my-4">
+                    <div>Do you need professional photography/videography services?</div>
+                    <div className="form-check-inline" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhotoService(e.target.value)}>
+                        <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
+                        <label htmlFor="existingWeb" className="form-check-label">Yes</label>
+                        <input type="radio" className="form-check-input mx-2" value="no" name="choice" />
+                        <label htmlFor="existingWeb" className="form-check-label">No</label>
+                    </div>
+                </div>
 
 
                 <div className="my-4">
@@ -95,6 +118,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = () => {
                     <input type="text" className="form-control" value={webLikesDis}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebLikesDis(e.target.value)} />
                 </div>
+                <SubmitEdit editable />
             </form>
         </section>
     );
