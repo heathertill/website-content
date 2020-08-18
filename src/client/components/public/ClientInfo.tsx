@@ -4,17 +4,36 @@ import { RouteComponentProps } from 'react-router-dom';
 import { json, User } from '../../utils/api';
 
 
-export interface ClientInfoProps extends RouteComponentProps {
-    
-}
+export interface ClientInfoProps extends RouteComponentProps<{ id: string }> { }
 
-const ClientInfo: React.SFC<ClientInfoProps> = ({history}) => {
+const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id } } }) => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [workNumber, setWorkNumber] = useState('');
     const [cellNumber, setCellNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [show, setShow] = useState(false);
+
+    const canEdit = async () => {
+        if (User.userid) {
+            try {
+                let client = await json(`/api/clientInfo/${User.userid}`)
+                if (client !== null) {
+                    setShow(true)
+                    setFirstName(client.firstName),
+                    setLastName(client.lastName),
+                    setWorkNumber(client.workNumber),
+                    setCellNumber(client.cellNumber),
+                    setEmail(client.email)
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
+
+    useEffect(() => { canEdit() }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         let body = {
@@ -26,17 +45,29 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({history}) => {
             email
         }
         e.preventDefault();
-        try {
-            let newInfo = await json('/api/clientInfo', 'POST', body)
-            if (newInfo) {
+        if (show === false) {
+            try {
+                let newInfo = await json('/api/clientInfo', 'POST', body)
+                if (newInfo) {
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        else {
+            try {
+                let editInfo = await json(`/api/clientInfo/${User.userid}`, 'PUT', body)
+            if (editInfo) {
                 history.push('/')
             }
-        } catch (e) {
-            console.log(e)
+            } catch (e) {
+                console.log(e)
+            }
         }
     };
 
-    return ( 
+    return (
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor="firstName">First Name</label>
@@ -54,7 +85,11 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({history}) => {
                 <label htmlFor="email">Email</label>
                 <input className="form-control" type="text" value={email} placeholder={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+                {show ? 
+                <button type="submit" className="btn btn-warning m-2">Edit</button>
+                :
                 <button type="submit" className="btn btn-warning m-2">Submit</button>
+                }
             </form>
         </section>
     );
