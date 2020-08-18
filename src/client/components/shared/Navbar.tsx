@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { User, ClearAccessToken } from '../../utils/api';
 
-export interface NavbarProps extends RouteComponentProps { }
+export interface NavbarProps { }
 
-const Navbar: React.SFC<NavbarProps> = ({ history }) => {
+const Navbar: React.SFC<NavbarProps> = () => {
 
     const showLogin = () => {
         if (User.userid !== null) {
@@ -16,8 +15,7 @@ const Navbar: React.SFC<NavbarProps> = ({ history }) => {
     }
 
     const logout = () => {
-        location.replace('/')
-        // location.reload();
+        location.replace('/');
         ClearAccessToken();
     }
 

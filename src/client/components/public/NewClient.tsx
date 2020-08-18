@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { RouteComponentProps } from 'react-router-dom';
 
-export interface HomeProps extends RouteComponentProps<{ history }> { }
+export interface HomeProps { }
 
 const Home: React.SFC<HomeProps> = () => {
     return (
