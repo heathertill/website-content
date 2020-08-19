@@ -8,7 +8,7 @@ import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
 import { User, json } from '../../utils/api';
 
-interface Features { name: string }
+interface Features { name: string, active: boolean }
 
 export interface StyleInfoProps extends RouteComponentProps { }
 
@@ -23,13 +23,11 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
     const [photoService, setPhotoService] = useState('');
     const [websites, setWebsites] = useState('');
     const [webLikesDis, setWebLikesDis] = useState('');
-    const [features, setFeatures] = useState([]);
+    const [features, setFeatures] = useState<Features[]>([]);
     const [editable, setEditable] = useState(false);
     const [show, setShow] = useState(false);
     const [mark, setMark] = useState(false);
-
-
-
+    const [active, setActive] = useState(false);
 
     const canEdit = async () => {
         if (User.userid) {
@@ -114,8 +112,11 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
 
     }
 
-    const handleCheckbox = () => {
-
+    const handleCheckbox = (e: any) => {
+        setActive(!active);
+        features.push(e.target.value)
+        console.log(features)
+        setActive(true)
     }
 
     return (
@@ -136,16 +137,16 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                 </div>
 
                 <div className="my-4">
-                    <div>What features do you want?</div>
+                    <div>What features are you interested in including on your website?</div>
                     {/* <div className="form-check"> */}
                     <div className="form-check">
-                        <input type="checkbox" className="form-check-input" value="Gallery"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => (features.push(e.target.value), console.log(features))} />
+                        <input type="checkbox" className="form-check-input" value="Gallery" disabled={active}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e)} />
                         <label htmlFor="" className="form-check-label">Gallery</label>
                     </div>
                     <div className="form-check">
                         <input type="checkbox" className="form-check-input" value="Calendar"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => (features.push(e.target.value), console.log(features))} />
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e)} />
                         <label htmlFor="" className="form-check-label">Calendar</label>
                     </div>
                     {/* </div> */}
