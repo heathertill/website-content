@@ -16,7 +16,13 @@ export const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, uri: str
     }
 };
 
-
+export const radioChecked = (radioValue: string, setRadio: any) => {
+    if (radioValue === 'yes') {
+        setRadio(true)
+    } else {
+        setRadio(false)
+    }
+}
 
 export const wayToGo = (message?: string, then?: any) => {
     Swal.fire({

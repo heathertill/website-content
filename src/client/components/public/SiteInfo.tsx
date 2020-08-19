@@ -34,11 +34,9 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                     setUpdateFreq(site.updateFreq)
                 }
                 if (site.webName !== 'no') {
-                    console.log('ding')
                     setShow(true)
                 }
                 if (site.domain !== 'no') {
-                    console.log('dong')
                     setShowDomName(true)
                 }
             } catch (e) {
@@ -103,6 +101,8 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             setDomain('no')
         }
     }
+
+
 
     return (
         <section>

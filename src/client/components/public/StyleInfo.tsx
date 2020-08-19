@@ -2,15 +2,17 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom'
 import SubmitEdit from '../../utils/submitEdit';
-import {wayToGo} from '../../utils/formService';
+import { wayToGo, radioChecked } from '../../utils/formService';
 import LogoRadio from '../radio/LogoRadio';
 import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
 import { User, json } from '../../utils/api';
 
+interface Features { name: string }
+
 export interface StyleInfoProps extends RouteComponentProps { }
 
-const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
+const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
 
     const [logo, setLogo] = useState('');
     const [style, setStyle] = useState('');
@@ -21,9 +23,13 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
     const [photoService, setPhotoService] = useState('');
     const [websites, setWebsites] = useState('');
     const [webLikesDis, setWebLikesDis] = useState('');
-    const [features, setFeatures] = useState('');
+    const [features, setFeatures] = useState([]);
     const [editable, setEditable] = useState(false);
     const [show, setShow] = useState(false);
+    const [mark, setMark] = useState(false);
+
+
+
 
     const canEdit = async () => {
         if (User.userid) {
@@ -32,15 +38,15 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
                 if (getStyle !== null) {
                     setEditable(true)
                     setLogo(getStyle.logo),
-                    setStyle(getStyle.style),
-                    setColor(getStyle.color),
-                    setStandards(getStyle.standards),
-                    setPrintMaterial(getStyle.printMaterial),
-                    setFonts(getStyle.fonts),
-                    setPhotoService(getStyle.photoService),
-                    setWebsites(getStyle.websites),
-                    setWebLikesDis(getStyle.webLikesDis)
-
+                        setStyle(getStyle.style),
+                        setColor(getStyle.color),
+                        setStandards(getStyle.standards),
+                        setPrintMaterial(getStyle.printMaterial),
+                        setFonts(getStyle.fonts),
+                        setPhotoService(getStyle.photoService),
+                        setWebsites(getStyle.websites),
+                        setWebLikesDis(getStyle.webLikesDis),
+                        radioChecked(getStyle.logo, setMark)
                 } if (getStyle.standards !== 'no') {
                     setShow(true)
                 }
@@ -50,15 +56,6 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
         }
     }
     useEffect(() => { canEdit() }, [])
-
-    const handleLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let radio = e.target.value
-        if (radio === 'yes') {
-            setLogo('yes')
-        } else {
-            setLogo('no')
-        }
-    };
 
     const handleStyle = (e: React.ChangeEvent<HTMLInputElement>) => {
         let radioStyle = e.target.value;
@@ -117,23 +114,50 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({history}) => {
 
     }
 
+    const handleCheckbox = () => {
+
+    }
+
     return (
         <section>
-            
-            <form  className="form-group" onSubmit={(e) => handleSubmit(e)} >
 
-                {/* <LogoRadio handlers={{ handleLogo }} /> */}
-
-            <div className="my-4">
+            <form className="form-group" onSubmit={(e) => handleSubmit(e)} >
+                <div className="my-4">
                     <div>Do you want to use a logo?</div>
-                <div className="form-check-inline" 
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.value)}>
-                        <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
+                    <div className="form-check-inline" id="logoRadio"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.value)}>
+                        <input type="radio" id="yes Logo" className="form-check-input mx-2" value="yes" name="logoChoice" checked={mark}
+                            onChange={() => setMark(true)} />
                         <label htmlFor="existingWeb" className="form-check-label">Yes</label>
-                        <input type="radio" className="form-check-input mx-2" value="no" name="choice" />
+                        <input type="radio" id="no Logo" className="form-check-input mx-2" value="no" name="logoChoice" checked={!mark}
+                            onChange={() => setMark(false)} />
                         <label htmlFor="existingWeb" className="form-check-label">No</label>
                     </div>
                 </div>
+
+                <div className="my-4">
+                    <div>What features do you want?</div>
+                    {/* <div className="form-check"> */}
+                    <div className="form-check">
+                        <input type="checkbox" className="form-check-input" value="Gallery"
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => (features.push(e.target.value), console.log(features))} />
+                        <label htmlFor="" className="form-check-label">Gallery</label>
+                    </div>
+                    <div className="form-check">
+                        <input type="checkbox" className="form-check-input" value="Calendar"
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => (features.push(e.target.value), console.log(features))} />
+                        <label htmlFor="" className="form-check-label">Calendar</label>
+                    </div>
+                    {/* </div> */}
+
+                    {/* <div className="form-check">
+                        <input type="checkbox" className="form-check-input"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => (features.push(e.target.value), console.log(features))} />
+                        <label htmlFor="" className="form-check-label"></label>
+                    </div> */}
+
+                </div>
+
                 <div className="my-4">
                     <label htmlFor="text">What style are you looking for? Professional, edgy, modern, calm, minimal, etc. </label>
                     <input type="text" className="form-control" value={style}
