@@ -143,42 +143,75 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
 
                 <div className="my-4">
                     <div>What features are you interested in including on your?</div>
-                    {/* <div className="form-check"> */}
-                    <div className="form-check">
-                        <input type="checkbox" className="form-check-input" value="Gallery" id="Gallery"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Gallery")} />
-                        <label className="form-check-label">Gallery</label>
+                    <div className="row">
+                        <div className="col">
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Gallery" id="Gallery"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Gallery")} />
+                                <label className="form-check-label">Gallery</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Calendar" id="Calendar"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Calendar")} />
+                                <label className="form-check-label">Calendar</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="e-Commerce" id="e-Commerce"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "e-Commerce")} />
+                                <label className="form-check-label">e-Commerce</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Registration form" id="Registration form"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Registration form")} />
+                                <label className="form-check-label">Registration form</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Blog" id="Blog"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Blog")} />
+                                <label className="form-check-label">Blog</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Sidebars" id="Sidebars"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Sidebars")} />
+                                <label className="form-check-label">Sidebars</label>
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Customer login" id="Customer login"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Customer login")} />
+                                <label className="form-check-label">Customer login</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Newsletter signup" id="Newsletter signup"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Newsletter signup")} />
+                                <label className="form-check-label">Newsletter signup</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Donations" id="Donations"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Donations")} />
+                                <label className="form-check-label">Donations</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Slide show" id="Slide show"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Slide show")} />
+                                <label className="form-check-label">Slide show</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="News and announcements" id="News and announcements"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "News and announcements")} />
+                                <label className="form-check-label">News and announcements</label>
+                            </div>
+                            <div className="form-check">
+                                <input type="checkbox" className="form-check-input" value="Project portfolio" id="Project portfolio"
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Project portfolio")} />
+                                <label className="form-check-label">Project portfolio</label>
+                            </div>
+                        </div>
                     </div>
-                    <div className="form-check">
-                        <input type="checkbox" className="form-check-input" value="Calendar" id="Calendar"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Calendar")} />
-                        <label className="form-check-label">Calendar</label>
-                    </div>
-                    <div className="form-check">
-                    <input type="checkbox" className="form-check-input" value="e-Commerce" id="e-Commerce"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "e-Commerce")} />
-                    <label className="form-check-label">e-Commerce</label>
-                    </div>
-                    <div className="form-check">
-                    <input type="checkbox" className="form-check-input" value="Registration form" id="Registration form"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "Registration form")} />
-                    <label className="form-check-label">Registration form</label>
-                    </div>
-                    <div className="form-check">
-                    <input type="checkbox" className="form-check-input" value="" id=""
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "")} />
-                    <label className="form-check-label"></label>
                 </div>
 
 
-
-                </div>
-
-                <div className="form-check">
-                    <input type="checkbox" className="form-check-input"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCheckbox(e.target.value, "")} />
-                    <label htmlFor="" className="form-check-label"></label>
-                </div>
 
 
 
