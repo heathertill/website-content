@@ -43,8 +43,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                         setPhotoService(getStyle.photoService),
                         setWebsites(getStyle.websites),
                         setWebLikesDis(getStyle.webLikesDis),
-                        radioChecked(getStyle.logo, setMark),
-                        console.log(getStyle.features)
+                        radioChecked(getStyle.logo, setMark)
                     if (getStyle.features === null) {
                         setFeatures(features)
                     }

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { User } from '../../utils/api'
 
-export interface LandingPageProps {
+export interface CallToActionProps { }
 
-}
-
-const LandingPage: React.SFC<LandingPageProps> = () => {
+const CallToAction: React.SFC<CallToActionProps> = () => {
     return (
         <div>
             <h1>Click here to get started!</h1>
@@ -14,4 +13,4 @@ const LandingPage: React.SFC<LandingPageProps> = () => {
     );
 }
 
-export default LandingPage;
+export default CallToAction;

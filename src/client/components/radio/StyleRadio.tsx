@@ -5,7 +5,7 @@ export interface StyleRadioProps {
     handlers: {
         handleStyle: any
     };
-   
+
 }
 
 const StyleRadio: React.SFC<StyleRadioProps> = ({ handlers }) => {

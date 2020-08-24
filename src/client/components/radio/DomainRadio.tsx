@@ -5,7 +5,7 @@ export interface DomainRadioProps {
     handlers: {
         handleDomain: any
     };
-   
+
 }
 
 const DomainRadio: React.SFC<DomainRadioProps> = ({ handlers }) => {

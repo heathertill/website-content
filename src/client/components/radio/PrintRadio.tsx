@@ -5,7 +5,7 @@ export interface PrintMaterialRadioProps {
     handlers: {
         handlePrint: any
     };
-   
+
 }
 
 const PrintMaterialRadio: React.SFC<PrintMaterialRadioProps> = ({ handlers }) => {

@@ -9,14 +9,14 @@ import Jumbo from '../components/shared/Jumbo';
 import Login from '../components/admin/Login';
 import Register from '../components/admin/Register';
 import NewClient from '../components/public/NewClient';
-import LandingPage from '../components/public/LandingPage';
+import CallToAction from '../components/public/CallToAction';
 
 import NewForms from './NewForms';
 
 
 const App: React.SFC<AppProps> = () => {
 
-    return ( 
+    return (
         <BrowserRouter>
             <main className="container">
                 <Navbar />
@@ -25,14 +25,14 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/NewClient' component={NewClient} />
                     <Route exact path='/Login' component={Login} />
                     <Route exact path='/Register' component={Register} />
-                    <Route exact path='/' component={LandingPage} />
+                    <Route exact path='/' component={CallToAction} />
                     <NewForms />
                 </Switch>
-        </main>
+            </main>
         </BrowserRouter>
     );
 }
 
 export default App;
 
-export interface AppProps {}
+export interface AppProps { }

@@ -7,6 +7,8 @@ import ClientInfo from './queries/clientInfo';
 import SiteInfo from './queries/siteInfo';
 import BrandInfo from './queries/brandInfo';
 import StyleInfo from './queries/styleInfo';
+import LandingInfo from './queries/landingInfo';
+import AboutInfo from './queries/aboutInfo';
 
 export const connection = knex(config.knex);
 
@@ -16,5 +18,7 @@ export default {
     ClientInfo,
     SiteInfo,
     BrandInfo,
-    StyleInfo
+    StyleInfo,
+    LandingInfo,
+    AboutInfo
 }

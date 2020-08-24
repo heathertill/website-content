@@ -1,21 +1,24 @@
 import * as React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
-import LandingPage from '../components/public/LandingPage';
+import LandingPage from '../components/public/LandingInfo';
 import ClientInfo from '../components/public/ClientInfo';
 import SiteInfo from '../components/public/SiteInfo';
 import BrandInfo from '../components/public/BrandInfo';
 import StyleInfo from '../components/public/StyleInfo';
+import LandingInfo from '../components/public/LandingInfo';
+import CallToAction from '../components/public/CallToAction';
 
 const NewForms: React.SFC<NewFormsProps> = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path='/' component={LandingPage} />
+                {/* <Route exact path='/' component={CallToAction} /> */}
                 <Route exact path='/ClientInfo' component={ClientInfo} />
                 <Route exact path='/SiteInfo' component={SiteInfo} />
                 <Route exact path='/BrandInfo' component={BrandInfo} />
                 <Route exact path='/StyleInfo' component={StyleInfo} />
+                <Route exact path='/LandingInfo' component={LandingInfo} />
             </Switch>
         </BrowserRouter>
 
