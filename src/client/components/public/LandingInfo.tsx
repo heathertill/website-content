@@ -34,7 +34,6 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
 
     useEffect(() => { canEdit() }, [])
 
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let body = {
@@ -46,7 +45,6 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
         }
         if (editable === false) {
             try {
-                console.log('ding')
                 let newLandingInfo = await json('/api/landingInfo', 'POST', body);
                 if (newLandingInfo) {
                     history.push('/')
@@ -56,39 +54,16 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
             }
         } else {
             try {
-                let editLandingInfo = await json(`/api/landingInfo/${User.userid}`, 'PUT', body)
-                console.log('body', body)
-                if (editLandingInfo) {
-                    wayToGo('Landing info has been edited');
-                    history.push('/')
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        }
-
-        if (editable === false) {
-            try {
-                let newInfo = await json('/api/clientInfo', 'POST', body)
-                if (newInfo) {
-                    history.push('/')
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        else {
-            try {
-                let editInfo = await json(`/api/clientInfo/${User.userid}`, 'PUT', body)
+                console.log('ding')
+                let editInfo = await json(`/api/landingInfo/${User.userid}`, 'PUT', body);
                 if (editInfo) {
-                    wayToGo('Client info has been edited!')
+                    wayToGo('Landing info has been edited!');
                     history.push('/')
                 }
             } catch (e) {
                 console.log(e)
             }
         }
-
     }
 
 

@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.put('/id:', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
     let id = req.params.id;
     let body = req.body;
     console.log('id', id, 'body', body)

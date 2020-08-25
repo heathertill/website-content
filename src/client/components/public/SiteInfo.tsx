@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
-import { wayToGo} from '../../utils/formService';
+import { wayToGo } from '../../utils/formService';
 import SubmitEdit from '../../utils/submitEdit';
 import DomainRadio from '../radio/DomainRadio';
 import WebRadio from '../radio/WebRadio';
@@ -28,10 +28,10 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                 if (site !== null) {
                     setEditable(true)
                     setWebName(site.webName),
-                    setHostName(site.hostName),
-                    setDomain(site.domain),
-                    setSiteManager(site.siteManager),
-                    setUpdateFreq(site.updateFreq)
+                        setHostName(site.hostName),
+                        setDomain(site.domain),
+                        setSiteManager(site.siteManager),
+                        setUpdateFreq(site.updateFreq)
                 }
                 if (site.webName !== 'no') {
                     setShow(true)
@@ -47,6 +47,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     useEffect(() => { canEdit() }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         let body = {
             userid: User.userid,
             webName,
@@ -55,8 +56,6 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             siteManager,
             updateFreq
         }
-        console.log('body', body)
-        e.preventDefault();
         if (editable === false) {
             try {
                 let newSiteInfo = await json('/api/siteInfo', 'POST', body);
@@ -149,7 +148,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                     <div>
                         <label htmlFor="">Who will be managing your website?</label>
                         <input type="text" className="form-control" value={siteManager}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteManager(e.target.value)} />
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteManager(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor="">How frequently do you intend to update your website?</label>
