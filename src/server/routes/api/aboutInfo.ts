@@ -24,6 +24,18 @@ router.post('/', async (req, res, next) => {
         console.log(e);
         res.sendStatus(500);
     }
+});
+
+router.put('/:id', async (req, res, next) => {
+    let id = req.params.id;
+    let body = req.body;
+    try {
+        let editAboutInfo = await queries.AboutInfo.editAboutInfo(body, id);
+        res.json(editAboutInfo);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
 })
 
 

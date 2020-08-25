@@ -9,6 +9,7 @@ import StyleInfo from '../components/public/StyleInfo';
 import LandingInfo from '../components/public/LandingInfo';
 import CallToAction from '../components/public/CallToAction';
 import PortfolioInfo from '../components/public/PortfolioInfo';
+import AboutInfo from '../components/public/AboutInfo';
 
 const NewForms: React.SFC<NewFormsProps> = () => {
     return (
@@ -20,6 +21,7 @@ const NewForms: React.SFC<NewFormsProps> = () => {
                 <Route exact path='/StyleInfo' component={StyleInfo} />
                 <Route exact path='/LandingInfo' component={LandingInfo} />
                 <Route exact path='/PortfolioInfo' component={PortfolioInfo} />
+                <Route exact path='/AboutInfo' component={AboutInfo} />
             </Switch>
         </BrowserRouter>
 
