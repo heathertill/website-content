@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import {RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
 import SubmitEdit from '../../utils/submitEdit';
+import { wayToGo } from '../../utils/formService';
 
-export interface LandingInfoProps { }
+export interface LandingInfoProps extends RouteComponentProps { }
 
-const LandingInfo: React.SFC<LandingInfoProps> = () => {
+const LandingInfo: React.SFC<LandingInfoProps> = ({history}) => {
 
     const [siteEntry, setSiteEntry] = useState('');
     const [branding, setBranding] = useState('');
@@ -44,14 +46,20 @@ const LandingInfo: React.SFC<LandingInfoProps> = () => {
         }
         if (editable === false) {
             try {
-                let newLandingInfo = await('/')
+                let newLandingInfo = await json('/api/landingInfo', 'POST', body);
+                if (newLandingInfo) {
+                    history.push('/')
+                }
             } catch (e) {
                 console.log(e)
             }
-
         } else {
             try {
-
+                let editLandingInfo = await json(`/api/landingInfo/${User.userid}`, 'PUT', body)
+                if (editLandingInfo) {
+                    wayToGo('Landing info has been edited');
+                    history.push('/')
+                }
             } catch (e) {
                 console.log(e)
             }
@@ -62,23 +70,23 @@ const LandingInfo: React.SFC<LandingInfoProps> = () => {
     return (
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                    <label htmlFor="" > </label>
+                <div className="my-3">
+                    <label htmlFor="siteEntry" >Site entry: How do you want the site to flow? Landing page with a Call to Action link on the opening page? Limited navigation menu on landing page? Continuous scrolling with visible navigation bar?</label>
                     <input className="form-control" type="text" value={siteEntry} placeholder={siteEntry}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteEntry(e.target.value)} />
                 </div>
-                <div>
-                    <label htmlFor="" > </label>
+                <div className="my-3">
+                    <label htmlFor="branding" >What images or branding do you want to be on your landing page?</label>
                     <input className="form-control" type="text" value={branding} placeholder={branding}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBranding(e.target.value)} />
                 </div>
-                <div>
-                    <label htmlFor="" > </label>
+                <div className="my-3">
+                    <label htmlFor="callToAction" >What is your call to action statement/purpose? Contact me about... Follow me.... Sign up...</label>
                     <input className="form-control" type="text" value={callToAction} placeholder={callToAction}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCallToAction(e.target.value)} />
                 </div>
-                <div>
-                    <label htmlFor="" > </label>
+                <div className="my-3">
+                    <label htmlFor="simWebFunc" >Have you seen any particular functions you like on another website? If so, list the url and explain what you like about it below.</label>
                     <input className="form-control" type="text" value={simWebFunc} placeholder={simWebFunc}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSimWebFunc(e.target.value)} />
                 </div>
