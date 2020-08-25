@@ -9,6 +9,7 @@ import siteInfoRouter from './siteInfo';
 import brandInfoRouter from './brandInfo';
 import styleInfoRouter from './styleInfo';
 import landingInfoRouter from './landingInfo';
+import aboutInfoRouter from './aboutInfo';
 
 const router = express.Router();
 
@@ -19,5 +20,6 @@ router.use('/siteInfo', siteInfoRouter);
 router.use('/brandInfo', brandInfoRouter);
 router.use('/styleInfo', styleInfoRouter);
 router.use('/landingInfo', landingInfoRouter);
+router.use('/aboutInfo', aboutInfoRouter);
 
 export default router;

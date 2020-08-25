@@ -20,7 +20,8 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({history}) => {
     const canEdit = async () => {
         if (User.userid) {
             try {
-                let about = await json(`/api/aboutInfo/${User.userid}`)
+                let about = await json(`/api/aboutInfo/${User.userid}`);
+                console.log('about', about)
                 if (about !== null) {
                     setEditable(true),
                         setEntryHistory(about.entryHistory),
@@ -73,29 +74,29 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({history}) => {
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <label htmlFor="" > </label>
-                    <input className="form-control" type="text" value={} placeholder={}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+                    <label htmlFor="entryHistory" >How did you get started?</label>
+                    <input className="form-control" type="text" value={entryHistory} placeholder={entryHistory}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEntryHistory(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="" > </label>
-                    <input className="form-control" type="text" value={} placeholder={}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+                    <label htmlFor="aboutYou" >What do you want to tell about yourself?</label>
+                    <input className="form-control" type="text" value={aboutYou} placeholder={aboutYou}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAboutYou(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="" > </label>
-                    <input className="form-control" type="text" value={} placeholder={}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+                    <label htmlFor="expSkills" >What are your skills and experience? Degrees, accreditations, life experience, etc. </label>
+                    <input className="form-control" type="text" value={expSkills} placeholder={expSkills}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExpSkills(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="" > </label>
-                    <input className="form-control" type="text" value={} placeholder={}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+                    <label htmlFor="portStyle" >How do you want to show your portfolio? A few highlighted items or a large gallery? Do you want any/all items to be links?</label>
+                    <input className="form-control" type="text" value={portStyle} placeholder={portStyle}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPortStyle(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="" > </label>
-                    <input className="form-control" type="text" value={} placeholder={}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+                    <label htmlFor="highlight" >What do you want to highlight? Include items you are proud of and show the depth and breadth of your skills/services.</label>
+                    <input className="form-control" type="text" value={highlight} placeholder={highlight}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHighlight(e.target.value)} />
                 </div>
                 <SubmitEdit editable />
             </form>
