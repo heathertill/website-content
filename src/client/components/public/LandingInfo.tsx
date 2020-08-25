@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
 import SubmitEdit from '../../utils/submitEdit';
 import { wayToGo } from '../../utils/formService';
 
 export interface LandingInfoProps extends RouteComponentProps { }
 
-const LandingInfo: React.SFC<LandingInfoProps> = ({history}) => {
+const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
 
     const [siteEntry, setSiteEntry] = useState('');
     const [branding, setBranding] = useState('');
@@ -46,6 +46,7 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({history}) => {
         }
         if (editable === false) {
             try {
+                console.log('ding')
                 let newLandingInfo = await json('/api/landingInfo', 'POST', body);
                 if (newLandingInfo) {
                     history.push('/')
@@ -56,6 +57,7 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({history}) => {
         } else {
             try {
                 let editLandingInfo = await json(`/api/landingInfo/${User.userid}`, 'PUT', body)
+                console.log('body', body)
                 if (editLandingInfo) {
                     wayToGo('Landing info has been edited');
                     history.push('/')
@@ -64,6 +66,29 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({history}) => {
                 console.log(e)
             }
         }
+
+        if (editable === false) {
+            try {
+                let newInfo = await json('/api/clientInfo', 'POST', body)
+                if (newInfo) {
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        else {
+            try {
+                let editInfo = await json(`/api/clientInfo/${User.userid}`, 'PUT', body)
+                if (editInfo) {
+                    wayToGo('Client info has been edited!')
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
     }
 
 

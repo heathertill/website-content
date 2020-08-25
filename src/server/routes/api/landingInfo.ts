@@ -28,6 +28,7 @@ router.post('/', async (req, res, next) => {
 router.put('/id:', async (req, res, next) => {
     let id = req.params.id;
     let body = req.body;
+    console.log('id', id, 'body', body)
     try {
         let editLandingInfo = await queries.LandingInfo.editLandingInfo(body, id);
         res.json(editLandingInfo);
@@ -35,6 +36,18 @@ router.put('/id:', async (req, res, next) => {
         console.log(e);
         res.sendStatus(500);
     }
-    })
+});
+
+// router.put('/:id', async (req, res, next) => {
+//     let id = req.params.id;
+//     let body = req.body;
+//     try {
+//         let editSiteInfo = await queries.SiteInfo.editSiteInfo(body, id)
+//         res.json(editSiteInfo)
+//     } catch (e) {
+//         console.log(e);
+//         res.sendStatus(500)
+//     }
+// })
 
 export default router;
