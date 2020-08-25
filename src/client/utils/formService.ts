@@ -34,3 +34,11 @@ export const wayToGo = (message?: string, then?: any) => {
         } 
     })
 }
+
+// <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+// <div>
+// <label htmlFor="" > </label>
+// <input className="form-control" type="text" value={} placeholder={}
+// onChange = {(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+//     </div>
+//         </form>
