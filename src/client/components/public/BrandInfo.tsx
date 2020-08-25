@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
 import SubmitEdit from '../../utils/submitEdit';
+import { wayToGo } from '../../utils/formService';
 
 export interface BrandInfoProps extends RouteComponentProps { }
 
@@ -23,11 +24,11 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
                 if (brand !== null) {
                     setEditable(true)
                     setPurpose(brand.purpose),
-                    setAudience(brand.audience),
-                    setCompetition(brand.competition),
-                    setSiteAction(brand.siteAction),
-                    setTagline(brand.tagline),
-                    setGreatness(brand.greatness)
+                        setAudience(brand.audience),
+                        setCompetition(brand.competition),
+                        setSiteAction(brand.siteAction),
+                        setTagline(brand.tagline),
+                        setGreatness(brand.greatness)
                 }
             } catch (e) {
                 console.log(e)
@@ -38,6 +39,7 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
     useEffect(() => { canEdit() }, [])
 
     const handleBrand = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         let body = {
             userid: User.userid,
             purpose,
@@ -47,16 +49,29 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
             tagline,
             greatness
         }
-        e.preventDefault();
-        try {
-            let newBrandInfo = await json('/api/brandInfo', 'POST', body)
-            if (newBrandInfo) {
-                history.push('/')
+        if (editable === false) {
+            try {
+                let newBrandInfo = await json('/api/brandInfo', 'POST', body)
+                if (newBrandInfo) {
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e)
             }
-        } catch (e) {
-            console.log(e)
+        } else {
+            try {
+                let editBrandInfo = await json(`/api/brandInfo/${User.userid}`, 'PUT', body);
+                if (editBrandInfo) {
+                    wayToGo('Brand info has been edited')
+                    history.push('/')
+                }
+            } catch (e) {
+                console.log(e)
+            }
         }
     }
+
+
 
     return (
         <div>
