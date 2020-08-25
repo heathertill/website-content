@@ -10,6 +10,8 @@ import Login from '../components/admin/Login';
 import Register from '../components/admin/Register';
 import NewClient from '../components/public/NewClient';
 import CallToAction from '../components/public/CallToAction';
+import ClientProfiles from '../components/admin/ClientProfiles';
+
 
 import NewForms from './NewForms';
 
@@ -26,6 +28,7 @@ const App: React.SFC<AppProps> = () => {
                     <Route exact path='/Login' component={Login} />
                     <Route exact path='/Register' component={Register} />
                     <Route exact path='/' component={CallToAction} />
+                    <Route exact path='/ClientProfiles' component={ClientProfiles} />
                     <NewForms />
                 </Switch>
             </main>

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom'
 import SubmitEdit from '../../utils/submitEdit';
 import { wayToGo, radioChecked } from '../../utils/formService';
-import LogoRadio from '../radio/LogoRadio';
 import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
 import { User, json } from '../../utils/api';
@@ -55,9 +54,6 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
             }
         }
     };
-
-
-
 
     useEffect(() => { canEdit() }, []);
 
@@ -131,15 +127,12 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                     <div>Do you want to use a logo?</div>
                     <div className="form-check-inline" id="logoRadio"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.value)}>
-                        <input type="radio" id="yes Logo" className="form-check-input mx-2" value="yes" name="logoChoice" checked={mark}
-                            onChange={() => setMark(true)} />
+                        <input type="radio" id="yes Logo" className="form-check-input mx-2" value="yes" name="logoChoice"  />
                         <label htmlFor="existingWeb" className="form-check-label">Yes</label>
-                        <input type="radio" id="no Logo" className="form-check-input mx-2" value="no" name="logoChoice" checked={!mark}
-                            onChange={() => setMark(false)} />
+                        <input type="radio" id="no Logo" className="form-check-input mx-2" value="no" name="logoChoice"  />
                         <label htmlFor="existingWeb" className="form-check-label">No</label>
                     </div>
                 </div>
-
                 <div className="my-4">
                     <div>What features are you interested in including on your?</div>
                     <div className="row">
@@ -209,11 +202,6 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                         </div>
                     </div>
                 </div>
-
-
-
-
-
                 <div className="my-4">
                     <label htmlFor="text">What style are you looking for? Professional, edgy, modern, calm, minimal, etc. </label>
                     <input type="text" className="form-control" value={style}
@@ -252,8 +240,6 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                         <label htmlFor="existingWeb" className="form-check-label">No</label>
                     </div>
                 </div>
-
-
                 <div className="my-4">
                     <label htmlFor="text">List 3-5 websites you would like to use as inspiration for your own</label>
                     <input type="text" className="form-control" value={websites}

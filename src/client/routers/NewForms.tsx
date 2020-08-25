@@ -8,17 +8,18 @@ import BrandInfo from '../components/public/BrandInfo';
 import StyleInfo from '../components/public/StyleInfo';
 import LandingInfo from '../components/public/LandingInfo';
 import CallToAction from '../components/public/CallToAction';
+import PortfolioInfo from '../components/public/PortfolioInfo';
 
 const NewForms: React.SFC<NewFormsProps> = () => {
     return (
         <BrowserRouter>
             <Switch>
-                {/* <Route exact path='/' component={CallToAction} /> */}
                 <Route exact path='/ClientInfo' component={ClientInfo} />
                 <Route exact path='/SiteInfo' component={SiteInfo} />
                 <Route exact path='/BrandInfo' component={BrandInfo} />
                 <Route exact path='/StyleInfo' component={StyleInfo} />
                 <Route exact path='/LandingInfo' component={LandingInfo} />
+                <Route exact path='/PortfolioInfo' component={PortfolioInfo} />
             </Switch>
         </BrowserRouter>
 

@@ -14,6 +14,12 @@ const Navbar: React.SFC<NavbarProps> = () => {
         }
     }
 
+    const showClientProfile = () => {
+        if (User.role === 'admin') {
+            return <Link className="text-white mx-3" to='/clientProfiles'>Client Profiles</Link>
+        }
+    }
+
     const logout = () => {
         location.replace('/');
         ClearAccessToken();
@@ -23,12 +29,19 @@ const Navbar: React.SFC<NavbarProps> = () => {
         location.replace(e)
     }
 
+    const editForms = () => {
+        
+    }
+
     return (
         <section>
             <ul className="nav bg-dark my-3 p-2 justify-content-between">
                 <div className="nav">
                     <li className="nav-item">
                         {showLogin()}
+                    </li>
+                    <li className="nav-item">
+                        {showClientProfile()}
                     </li>
                     <div>
                         <select name="" id="" className="form-control"
@@ -39,6 +52,7 @@ const Navbar: React.SFC<NavbarProps> = () => {
                             <option value="brandInfo">Brand Info</option>
                             <option value="styleInfo">Style Info</option>
                             <option value="landingInfo">Landing Info</option>
+                            <option value="portfolioInfo">Portfolio Info</option>
                         </select>
                     </div>
                     <li className="nav-item">
