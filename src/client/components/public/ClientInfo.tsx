@@ -51,8 +51,8 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
             try {
                 let newInfo = await json('/api/clientInfo', 'POST', body)
                 if (newInfo) {
-                    console.log('ding');
-                    history.push('/NewClient')
+                    history.push('/NewClient');
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)
@@ -63,7 +63,8 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
                 let editInfo = await json(`/api/clientInfo/${User.userid}`, 'PUT', body)
                 if (editInfo) {
                 wayToGo('Client info has been edited!')
-                history.push('/')
+                    history.push('/');
+                    location.reload()
             }
             } catch (e) {
                 console.log(e)
