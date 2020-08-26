@@ -29,9 +29,7 @@ const Navbar: React.SFC<NavbarProps> = () => {
         location.replace(e)
     }
 
-    const editForms = () => {
-        
-    }
+    
 
     return (
         <section>
