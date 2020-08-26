@@ -17,10 +17,12 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
     const [expSkills, setExpSkills] = useState('');
     const [portStyle, setPortStyle] = useState('');
     const [highlight, setHighlight] = useState('');
+    const [qualifications, setQualifications] = useState('');
+    const [serviceProd, setServiceProd] = useState('');
     const [isEditable, setIsEditable] = useState(false);
 
+
     const canEdit = async () => {
-        let able = localStorage.getItem('aboutIn') || null;
         if (User.userid) {
             try {
                 let about = await json(`/api/aboutInfo/${User.userid}`);
@@ -31,7 +33,8 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
                         setExpSkills(about.expSkills),
                         setPortStyle(about.portStyle),
                         setHighlight(about.highlight),
-                        console.log('editable1', isEditable);
+                        setQualifications(about.qualifications),
+                        setServiceProd(about.serviceProd)
                 }
             } catch (e) {
                 console.log(e)
@@ -49,14 +52,14 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
             aboutYou,
             expSkills,
             portStyle,
-            highlight
+            highlight,
+            qualifications,
+            serviceProd
         }
         if (isEditable === false) {
             try {
                 let newAboutInfo = await json('/api/aboutInfo', 'POST', body);
-
                 if (newAboutInfo) {
-                    localStorage.setItem('aboutIn', 'yes')
                     history.push('/')
                 }
             } catch (e) {
@@ -66,9 +69,7 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
             try {
                 let editAboutInfo = await json(`/api/aboutInfo/${User.userid}`, 'PUT', body);
                 if (editAboutInfo) {
-
                     wayToGo('About info has been updated');
-                    localStorage.setItem('aboutIn', 'yes')
                     history.push('/');
                 }
             } catch (e) {
@@ -91,7 +92,12 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAboutYou(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="expSkills" >What are your skills and experience? Degrees, accreditations, life experience, etc. </label>
+                    <label htmlFor="qualifications" >Please list your qualificatons. Degrees, accreditations, etc.</label>
+                    <input className="form-control" type="text" value={qualifications} placeholder={qualifications}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQualifications(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="expSkills" >What are your skills and experience? Previous jobs, hobbies, life experience, etc. that have help build your experience or show your expertice.</label>
                     <input className="form-control" type="text" value={expSkills} placeholder={expSkills}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExpSkills(e.target.value)} />
                 </div>
@@ -104,6 +110,11 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
                     <label htmlFor="highlight" >What do you want to highlight? Include items you are proud of and show the depth and breadth of your skills/services.</label>
                     <input className="form-control" type="text" value={highlight} placeholder={highlight}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHighlight(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="serviceProd" >What services or products do you offer?</label>
+                    <input className="form-control" type="text" value={serviceProd} placeholder={serviceProd}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setServiceProd(e.target.value)} />
                 </div>
                 <SubmitEdit editable={isEditable} />
             </form>

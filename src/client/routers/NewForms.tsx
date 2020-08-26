@@ -8,7 +8,6 @@ import BrandInfo from '../components/public/BrandInfo';
 import StyleInfo from '../components/public/StyleInfo';
 import LandingInfo from '../components/public/LandingInfo';
 import CallToAction from '../components/public/CallToAction';
-import PortfolioInfo from '../components/public/PortfolioInfo';
 import AboutInfo from '../components/public/AboutInfo';
 
 const NewForms: React.SFC<NewFormsProps> = () => {
