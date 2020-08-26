@@ -51,7 +51,8 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
             try {
                 let newInfo = await json('/api/clientInfo', 'POST', body)
                 if (newInfo) {
-                    history.push('/')
+                    console.log('ding');
+                    history.push('/NewClient')
                 }
             } catch (e) {
                 console.log(e)
