@@ -42,6 +42,5 @@ export const ClearAccessToken = () => {
     AccessToken = '';
     if (localStorage) {
         localStorage.clear()
-        console.log('localstorage', User.userid)
     }
 }

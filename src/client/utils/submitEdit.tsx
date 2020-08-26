@@ -8,7 +8,6 @@ const SubmitEdit: React.SFC<SubmitEditProps> = ({ editable }) => {
 
     return (
         <div>
-            {console.log('submitEdit', editable)}
             {editable ?
                 <button type="submit" className="btn btn-warning m-2">Edit</button>
                 :

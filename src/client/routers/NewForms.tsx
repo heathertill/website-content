@@ -20,7 +20,7 @@ const NewForms: React.SFC<NewFormsProps> = () => {
                 <Route exact path='/BrandInfo' component={BrandInfo} />
                 <Route exact path='/StyleInfo' component={StyleInfo} />
                 <Route exact path='/LandingInfo' component={LandingInfo} />
-                <Route exact path='/PortfolioInfo' component={PortfolioInfo} />
+                {/* <Route exact path='/PortfolioInfo' component={PortfolioInfo} /> */}
                 <Route exact path='/AboutInfo' component={AboutInfo} />
             </Switch>
         </BrowserRouter>

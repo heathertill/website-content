@@ -19,25 +19,12 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
     const [highlight, setHighlight] = useState('');
     const [isEditable, setIsEditable] = useState(false);
 
-    // const canEdit = async () => {
-
-    //     console.log('editable', isEditable)
-    //     // setEditable(false);
-    // }
-
-
     const canEdit = async () => {
-        console.log('user', User)
         let able = localStorage.getItem('aboutIn') || null;
-        console.log('able', able);
-        console.log('editable', isEditable);
-        if (User.userid && able !== null) {
+        if (User.userid) {
             try {
                 let about = await json(`/api/aboutInfo/${User.userid}`);
-                console.log('about', about)
-                // let able = localStorage.getItem('aboutIn') || null;
-                // console.log('able1', able);
-                if (able !== null) {
+                if (about !== null) {
                     setIsEditable(true),
                         setEntryHistory(about.entryHistory),
                         setAboutYou(about.aboutYou),
