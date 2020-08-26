@@ -19,14 +19,14 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [show, setShow] = useState(false);
     const [showDom, setShowDom] = useState(false);
     const [showDomName, setShowDomName] = useState(false);
-    const [editable, setEditable] = useState(false);
+    const [isEditable, setIsEditable] = useState(false);
 
     const canEdit = async () => {
         if (User.userid) {
             try {
                 let site = await json(`/api/siteInfo/${User.userid}`)
                 if (site !== null) {
-                    setEditable(true)
+                    setIsEditable(true)
                     setWebName(site.webName),
                         setHostName(site.hostName),
                         setDomain(site.domain),
@@ -56,7 +56,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             siteManager,
             updateFreq
         }
-        if (editable === false) {
+        if (isEditable === false) {
             try {
                 let newSiteInfo = await json('/api/siteInfo', 'POST', body);
                 if (newSiteInfo) {
@@ -156,7 +156,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
                     </div>
                 </div>
-                <SubmitEdit editable />
+                <SubmitEdit editable={isEditable} />
             </form>
         </section>
     );

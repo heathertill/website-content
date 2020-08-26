@@ -13,14 +13,14 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
     const [branding, setBranding] = useState('');
     const [callToAction, setCallToAction] = useState('');
     const [simWebFunc, setSimWebFunc] = useState('');
-    const [editable, setEditable] = useState(false);
+    const [isEditable, setIsEditable] = useState(false);
 
     const canEdit = async () => {
         if (User.userid) {
             try {
                 let landing = await json(`/api/landingInfo/${User.userid}`)
                 if (landing !== null) {
-                    setEditable(true),
+                    setIsEditable(true),
                         setSiteEntry(landing.siteEntry),
                         setBranding(landing.branding),
                         setCallToAction(landing.callToAction),
@@ -43,7 +43,7 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
             callToAction,
             simWebFunc
         }
-        if (editable === false) {
+        if (isEditable === false) {
             try {
                 let newLandingInfo = await json('/api/landingInfo', 'POST', body);
                 if (newLandingInfo) {
@@ -90,7 +90,7 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
                     <input className="form-control" type="text" value={simWebFunc} placeholder={simWebFunc}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSimWebFunc(e.target.value)} />
                 </div>
-                <SubmitEdit editable />
+                <SubmitEdit editable={isEditable} />
             </form>
         </section>
     );

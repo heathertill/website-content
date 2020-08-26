@@ -10,48 +10,47 @@ export interface AboutInfoProps extends RouteComponentProps { }
 
 const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
 
+
+
     const [entryHistory, setEntryHistory] = useState('');
     const [aboutYou, setAboutYou] = useState('');
     const [expSkills, setExpSkills] = useState('');
     const [portStyle, setPortStyle] = useState('');
     const [highlight, setHighlight] = useState('');
-    const [editable, setEditable] = useState(false);
-
-    const canEdit = async () => {
-
-        console.log('editable', editable)
-
-        return (
-            <SubmitEdit editable />
-        )
-
-    }
+    const [isEditable, setIsEditable] = useState(false);
 
     // const canEdit = async () => {
-    //     console.log('user', User)
-    //     let able = localStorage.getItem('aboutIn') || null;
-    //     console.log('able', able);
-    //     console.log('editable', editable);
-    //     if (User.userid && able !== null) {
-    //         try {
-    //             let about = await json(`/api/aboutInfo/${User.userid}`);
-    //             console.log('about', about)
-    //             let able = localStorage.getItem('aboutIn') || null;
-    //             console.log('able1', able);
-    //             if (able !== null) {
-    //                 setEditable(true),
-    //                     setEntryHistory(about.entryHistory),
-    //                     setAboutYou(about.aboutYou),
-    //                     setExpSkills(about.expSkills),
-    //                     setPortStyle(about.portStyle),
-    //                     setHighlight(about.highlight),
-    //                     console.log('editable1', editable);
-    //             }
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-    //     }
+
+    //     console.log('editable', isEditable)
+    //     // setEditable(false);
     // }
+
+
+    const canEdit = async () => {
+        console.log('user', User)
+        let able = localStorage.getItem('aboutIn') || null;
+        console.log('able', able);
+        console.log('editable', isEditable);
+        if (User.userid && able !== null) {
+            try {
+                let about = await json(`/api/aboutInfo/${User.userid}`);
+                console.log('about', about)
+                // let able = localStorage.getItem('aboutIn') || null;
+                // console.log('able1', able);
+                if (able !== null) {
+                    setIsEditable(true),
+                        setEntryHistory(about.entryHistory),
+                        setAboutYou(about.aboutYou),
+                        setExpSkills(about.expSkills),
+                        setPortStyle(about.portStyle),
+                        setHighlight(about.highlight),
+                        console.log('editable1', isEditable);
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
 
     useEffect(() => { canEdit() }, [])
 
@@ -65,7 +64,7 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
             portStyle,
             highlight
         }
-        if (editable === false) {
+        if (isEditable === false) {
             try {
                 let newAboutInfo = await json('/api/aboutInfo', 'POST', body);
 
@@ -119,7 +118,7 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
                     <input className="form-control" type="text" value={highlight} placeholder={highlight}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHighlight(e.target.value)} />
                 </div>
-                <SubmitEdit editable />
+                <SubmitEdit editable={isEditable} />
             </form>
         </section>
     );

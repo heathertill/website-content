@@ -15,14 +15,14 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
     const [siteAction, setSiteAction] = useState('');
     const [tagline, setTagline] = useState('');
     const [greatness, setGreatness] = useState('');
-    const [editable, setEditable] = useState(false);
+    const [isEditable, setIsEditable] = useState(false);
 
     const canEdit = async () => {
         if (User.userid) {
             try {
                 let brand = await json(`/api/brandInfo/${User.userid}`)
                 if (brand !== null) {
-                    setEditable(true)
+                    setIsEditable(true)
                     setPurpose(brand.purpose),
                         setAudience(brand.audience),
                         setCompetition(brand.competition),
@@ -49,7 +49,7 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
             tagline,
             greatness
         }
-        if (editable === false) {
+        if (isEditable === false) {
             try {
                 let newBrandInfo = await json('/api/brandInfo', 'POST', body)
                 if (newBrandInfo) {
@@ -106,7 +106,7 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
                     <input type="text" className="form-control" value={greatness}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGreatness(e.target.value)} />
                 </div>
-                <SubmitEdit editable />
+                <SubmitEdit editable={isEditable} />
             </form>
         </div>
 

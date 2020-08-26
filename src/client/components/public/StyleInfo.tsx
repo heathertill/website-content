@@ -23,7 +23,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
     const [websites, setWebsites] = useState('');
     const [webLikesDis, setWebLikesDis] = useState('');
     const [features, setFeatures] = useState([]);
-    const [editable, setEditable] = useState(false);
+    const [isEditable, setIsEditable] = useState(false);
     const [show, setShow] = useState(false);
     const [mark, setMark] = useState(false);
 
@@ -32,7 +32,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
             try {
                 let getStyle = await json(`/api/styleInfo/${User.userid}`)
                 if (getStyle !== null) {
-                    setEditable(true)
+                    setIsEditable(true)
                     setLogo(getStyle.logo),
                         setStyle(getStyle.style),
                         setColor(getStyle.color),
@@ -93,7 +93,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
         }
         console.log(body)
         e.preventDefault();
-        if (editable === false) {
+        if (isEditable === false) {
             try {
                 let newStyleInfo = await json('/api/styleInfo', 'POST', body);
                 if (newStyleInfo) {
@@ -250,7 +250,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                     <input type="text" className="form-control" value={webLikesDis}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebLikesDis(e.target.value)} />
                 </div>
-                <SubmitEdit editable />
+                <SubmitEdit editable={isEditable} />
             </form>
         </section>
     );
