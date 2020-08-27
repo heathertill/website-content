@@ -53,7 +53,8 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
             try {
                 let newBrandInfo = await json('/api/brandInfo', 'POST', body)
                 if (newBrandInfo) {
-                    history.push('/')
+                    history.push('/NewClient');
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)
@@ -64,6 +65,7 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
                 if (editBrandInfo) {
                     wayToGo('Brand info has been edited')
                     history.push('/')
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)

@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import queries from '../../db';
-import { json } from '../../../client/utils/api';
 
 const router = Router();
 

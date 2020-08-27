@@ -47,7 +47,8 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
             try {
                 let newLandingInfo = await json('/api/landingInfo', 'POST', body);
                 if (newLandingInfo) {
-                    history.push('/')
+                    history.push('/NewClient');
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)
@@ -59,6 +60,7 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
                 if (editInfo) {
                     wayToGo('Landing info has been edited!');
                     history.push('/')
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)

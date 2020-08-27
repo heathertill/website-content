@@ -60,7 +60,8 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
             try {
                 let newAboutInfo = await json('/api/aboutInfo', 'POST', body);
                 if (newAboutInfo) {
-                    history.push('/')
+                    history.push('/NewClient');
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)
@@ -71,6 +72,7 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
                 if (editAboutInfo) {
                     wayToGo('About info has been updated');
                     history.push('/');
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)

@@ -97,7 +97,8 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
             try {
                 let newStyleInfo = await json('/api/styleInfo', 'POST', body);
                 if (newStyleInfo) {
-                    history.push('/')
+                    history.push('/NewClient');
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)
@@ -108,6 +109,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                 if (editStyleInfo) {
                     wayToGo('Style info has been edited');
                     history.push('/')
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)

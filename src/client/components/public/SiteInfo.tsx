@@ -60,7 +60,8 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             try {
                 let newSiteInfo = await json('/api/siteInfo', 'POST', body);
                 if (newSiteInfo) {
-                    history.push('/')
+                    history.push('/NewClient');
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e);
@@ -71,6 +72,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                 if (editInfo) {
                     wayToGo('Site info has been edited!');
                     history.push('/')
+                    location.reload();
                 }
             } catch (e) {
                 console.log(e)
