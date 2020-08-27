@@ -51,6 +51,8 @@ const Navbar: React.SFC<NavbarProps> = () => {
                             <option value="styleInfo">Style Info</option>
                             <option value="landingInfo">Landing Info</option>
                             <option value="aboutInfo">About Info</option>
+                            <option value="seoContentInfo">SEO Content Info</option>
+                            <option value="contactInfo">Contact Info</option>
                         </select>
                     </div>
                     <li className="nav-item">

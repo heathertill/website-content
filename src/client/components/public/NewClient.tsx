@@ -30,6 +30,12 @@ const Home: React.SFC<HomeProps> = () => {
             <div>
                 <Link to={'/AboutInfo'} className="btn btn-warning m-2">About Info</Link>
             </div>
+            <div>
+                <Link to={'/SeoContentInfo'} className="btn btn-warning m-2">SEO Content Info</Link>
+            </div>
+            <div>
+                <Link to={'/ContactInfo'} className="btn btn-warning m-2">Contact Info</Link>
+            </div>
         </section>
     );
 }
