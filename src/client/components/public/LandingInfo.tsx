@@ -55,12 +55,13 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
             }
         } else {
             try {
-                console.log('ding')
                 let editInfo = await json(`/api/landingInfo/${User.userid}`, 'PUT', body);
                 if (editInfo) {
                     wayToGo('Landing info has been edited!');
                     history.push('/')
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 }
             } catch (e) {
                 console.log(e)

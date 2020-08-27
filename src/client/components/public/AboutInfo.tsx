@@ -72,7 +72,9 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
                 if (editAboutInfo) {
                     wayToGo('About info has been updated');
                     history.push('/');
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 }
             } catch (e) {
                 console.log(e)

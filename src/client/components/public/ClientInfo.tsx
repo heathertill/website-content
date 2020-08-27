@@ -64,7 +64,9 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
                 if (editInfo) {
                 wayToGo('Client info has been edited!')
                     history.push('/');
-                    location.reload()
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
             }
             } catch (e) {
                 console.log(e)

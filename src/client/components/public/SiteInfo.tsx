@@ -75,7 +75,9 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                 if (editInfo) {
                     wayToGo('Site info has been edited!');
                     history.push('/')
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 }
             } catch (e) {
                 console.log(e)

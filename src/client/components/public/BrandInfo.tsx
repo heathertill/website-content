@@ -65,7 +65,9 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
                 if (editBrandInfo) {
                     wayToGo('Brand info has been edited')
                     history.push('/')
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 }
             } catch (e) {
                 console.log(e)

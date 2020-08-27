@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, BrowserRouter, Route } from 'react-router-dom';
+import { Switch, BrowserRouter, Route, withRouter } from 'react-router-dom';
 
 import LandingPage from '../components/public/LandingInfo';
 import ClientInfo from '../components/public/ClientInfo';
@@ -29,6 +29,6 @@ const NewForms: React.SFC<NewFormsProps> = () => {
     );
 }
 
-export default NewForms;
+export default withRouter(NewForms);
 
 export interface NewFormsProps { }

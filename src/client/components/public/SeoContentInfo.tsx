@@ -75,19 +75,20 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
             }
         } else {
             try {
-                console.log('ding')
                 let editSeoContent = await json(`/api/seoContentInfo/${User.userid}`, 'PUT', body);
                 if (editSeoContent) {
-                    
-                    history.push('/')
-                    location.reload();
                     wayToGo('SEO Content has been edited!');
+                    history.push('/');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 }
             } catch (e) {
                 console.log(e)
             }
         }
     };
+
 
     const handleBlog = (e: React.ChangeEvent<HTMLInputElement>) => {
         let blogRadio = e.target.value
@@ -134,10 +135,10 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFound(e.target.value)} />
                 </div>
                 <div className="my-3">
-                    <Radio handlers={{ function: handleBlog }} values={{ message: blogMessage }} name={{radioName: 'blogRadio'}} />
+                    <Radio handlers={{ function: handleBlog }} values={{ message: blogMessage }} name={{ radioName: 'blogRadio' }} />
                 </div>
                 <div className="my-3">
-                    <Radio handlers={{ function: handleSMRadio }} values={{ message: mediaMessage }} name={{radioName: 'socialRadio'}} />
+                    <Radio handlers={{ function: handleSMRadio }} values={{ message: mediaMessage }} name={{ radioName: 'socialRadio' }} />
                     {showSM ?
                         <div className="my-3">
                             <label htmlFor="socialMedia">Please list the social media accounts.</label>
@@ -147,7 +148,7 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
                         : null}
                 </div>
                 <div>
-                    <Radio handlers={{ function: handleEmailRadio }} values={{ message: emailMessage }} name={{radioName: 'emailRadio'}} />
+                    <Radio handlers={{ function: handleEmailRadio }} values={{ message: emailMessage }} name={{ radioName: 'emailRadio' }} />
                     {showEmail ?
                         <div className="my-3">
                             <label htmlFor="emailService">Please list the email service.</label>
@@ -157,7 +158,7 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
                         : null}
                 </div>
                 <div className="my-3">
-                    <Radio handlers={{ function: (e: React.ChangeEvent<HTMLInputElement>) => setEmailCamp(e.target.value) }} values={{ message: campMessage }} name={{radioName: 'campRadio'}} />
+                    <Radio handlers={{ function: (e: React.ChangeEvent<HTMLInputElement>) => setEmailCamp(e.target.value) }} values={{ message: campMessage }} name={{ radioName: 'campRadio' }} />
                 </div>
                 <SubmitEdit editable={isEditable} />
             </form>

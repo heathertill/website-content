@@ -9,8 +9,7 @@ const CallToAction: React.SFC<CallToActionProps> = () => {
         <div>
             <div>
                 <h1>Welcome to my website.  Please look around and have fun!!!</h1>
-</div>
-
+            </div>
             <h3>Click here to get started!</h3>
             <Link to={'/NewClient'} className="btn btn-warning m-2">New Client Forms</Link>
         </div>

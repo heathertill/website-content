@@ -109,7 +109,9 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                 if (editStyleInfo) {
                     wayToGo('Style info has been edited');
                     history.push('/')
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 }
             } catch (e) {
                 console.log(e)
