@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
 import Radio from '../../utils/radio';
+import { wayToGo } from '../../utils/formService';
+import SubmitEdit from '../../utils/submitEdit';
 
 export interface SeoContentInfoProps extends RouteComponentProps { }
 
@@ -16,9 +18,12 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
     const [emailService, setEmailService] = useState('');
     const [isEditable, setIsEditable] = useState(false);
     const [showSM, setShowSM] = useState(false);
+    const [showEmail, setShowEmail] = useState(false);
 
     const blogMessage = 'Will you maintain an active blog with content relebant to your business?';
     const mediaMessage = 'Will you maintain social media accounts?';
+    const emailMessage = 'Do you currently utilize an email service such as Mail Chimp or Constant Contact?';
+    const campMessage = 'Do you plan to utilize an active email campaign to existing clients and prospects?';
 
     const canEdit = async () => {
         if (User.userid) {
@@ -32,6 +37,12 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
                         setSocialMedia(seoContent.socialMedia),
                         setEmailCamp(seoContent.emailCamp),
                         setEmailService(seoContent.emailService)
+                    if (seoContent.socialMedia !== 'no') {
+                        setShowSM(true)
+                    }
+                    if (seoContent.emailService !== 'no') {
+                        setShowEmail(true)
+                    }
                 }
             } catch (e) {
                 console.log(e)
@@ -41,17 +52,37 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
 
     useEffect(() => { canEdit() }, []);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        let body = {
+            userid: User.userid,
+            knownFor,
+            found,
+            blog,
+            socialMedia,
+            emailCamp,
+            emailService
+        }
         if (isEditable === false) {
             try {
-
+                let newSeoContent = await json('/api/seoContentInfo', 'POST', body);
+                if (newSeoContent) {
+                    history.push('/NewClient');
+                    location.reload();
+                }
             } catch (e) {
                 console.log(e)
             }
-
         } else {
             try {
-
+                console.log('ding')
+                let editSeoContent = await json(`/api/seoContentInfo/${User.userid}`, 'PUT', body);
+                if (editSeoContent) {
+                    
+                    history.push('/')
+                    location.reload();
+                    wayToGo('SEO Content has been edited!');
+                }
             } catch (e) {
                 console.log(e)
             }
@@ -59,8 +90,8 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
     };
 
     const handleBlog = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let radio = e.target.value
-        if (radio === 'yes') {
+        let blogRadio = e.target.value
+        if (blogRadio === 'yes') {
             setBlog('yes')
         } else {
             setBlog('no')
@@ -68,12 +99,22 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
     };
 
     const handleSMRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let radio = e.target.value;
-        if (radio === 'yes') {
+        let smRadio = e.target.value;
+        if (smRadio === 'yes') {
             setShowSM(true)
         } else {
             setShowSM(false);
-            setSocialMedia(radio);
+            setSocialMedia(smRadio);
+        }
+    };
+
+    const handleEmailRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let emRadio = e.target.value;
+        if (emRadio === 'yes') {
+            setShowEmail(true);
+        } else {
+            setShowEmail(false);
+            setEmailService('no')
         }
     };
 
@@ -93,10 +134,10 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFound(e.target.value)} />
                 </div>
                 <div className="my-3">
-                    <Radio handlers={{ function: handleBlog }} values={{ message: blogMessage }} />
+                    <Radio handlers={{ function: handleBlog }} values={{ message: blogMessage }} name={{radioName: 'blogRadio'}} />
                 </div>
                 <div className="my-3">
-                    <Radio handlers={{ function: handleSMRadio }} values={{ message: mediaMessage }} />
+                    <Radio handlers={{ function: handleSMRadio }} values={{ message: mediaMessage }} name={{radioName: 'socialRadio'}} />
                     {showSM ?
                         <div className="my-3">
                             <label htmlFor="socialMedia">Please list the social media accounts.</label>
@@ -105,7 +146,20 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
                         </div>
                         : null}
                 </div>
-
+                <div>
+                    <Radio handlers={{ function: handleEmailRadio }} values={{ message: emailMessage }} name={{radioName: 'emailRadio'}} />
+                    {showEmail ?
+                        <div className="my-3">
+                            <label htmlFor="emailService">Please list the email service.</label>
+                            <input className="form-control" type="text" value={emailService} placeholder={emailService}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmailService(e.target.value)} />
+                        </div>
+                        : null}
+                </div>
+                <div className="my-3">
+                    <Radio handlers={{ function: (e: React.ChangeEvent<HTMLInputElement>) => setEmailCamp(e.target.value) }} values={{ message: campMessage }} name={{radioName: 'campRadio'}} />
+                </div>
+                <SubmitEdit editable={isEditable} />
             </form>
         </section>
     );

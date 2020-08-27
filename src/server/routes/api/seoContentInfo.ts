@@ -3,7 +3,7 @@ import queries from '../../db';
 
 const router = Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     let id = req.params.id;
     try {
         let [seoContent] = await queries.SeoContentInfo.getSeoContentInfo(id);
@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
         res.sendStatus(500);
     }
 });
+
 
 router.post('/', async (req, res, next) => {
     let body = req.body;
