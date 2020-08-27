@@ -33,11 +33,36 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = () => {
         }
     }
 
-    useEffect(() => { canEdit() }, [])
+    useEffect(() => { canEdit() }, []);
+
+    const handleSubmit = () => {
+        if (isEditable === false) {
+            try {
+
+            } catch (e) {
+                console.log(e)
+            }
+
+        } else {
+            try {
+
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
 
 
     return (
-        <div>Hello from seoContent</div>
+        <section>
+            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+                <div>
+                    <label htmlFor="" > </label>
+                    <input className="form-control" type="text" value={} placeholder={}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+                </div>
+            </form>
+        </section>
     );
 }
 
