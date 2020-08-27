@@ -10,6 +10,8 @@ import brandInfoRouter from './brandInfo';
 import styleInfoRouter from './styleInfo';
 import landingInfoRouter from './landingInfo';
 import aboutInfoRouter from './aboutInfo';
+import seoContentInfoRouter from './seoContentInfo';
+import contactInfoRouter from './contactInfo';
 
 const router = express.Router();
 
@@ -21,5 +23,7 @@ router.use('/brandInfo', brandInfoRouter);
 router.use('/styleInfo', styleInfoRouter);
 router.use('/landingInfo', landingInfoRouter);
 router.use('/aboutInfo', aboutInfoRouter);
+router.use('/seoContentInfo', seoContentInfoRouter);
+router.use('/contactInfo', contactInfoRouter);
 
 export default router;
