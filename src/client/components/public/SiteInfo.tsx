@@ -6,6 +6,8 @@ import { wayToGo } from '../../utils/formService';
 import SubmitEdit from '../../utils/submitEdit';
 import DomainRadio from '../radio/DomainRadio';
 import WebRadio from '../radio/WebRadio';
+import LogoRadio from '../radio/LogoRadio';
+import Radio from '../../utils/radio';
 
 export interface SiteInfoProps extends RouteComponentProps { }
 
@@ -20,6 +22,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [showDom, setShowDom] = useState(false);
     const [showDomName, setShowDomName] = useState(false);
     const [isEditable, setIsEditable] = useState(false);
+  
 
     const canEdit = async () => {
         if (User.userid) {
@@ -103,13 +106,14 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
         }
     }
 
-
+    let message = 'test';
 
     return (
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <WebRadio handlers={{ handleWeb }} />
+                    {/* <Radio handlers={{function: handleWeb}} values={{message}} /> */}
                     <div>
                         {show ? <div>
                             <div>
