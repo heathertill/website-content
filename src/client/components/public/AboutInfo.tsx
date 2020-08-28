@@ -27,14 +27,14 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
             try {
                 let about = await json(`/api/aboutInfo/${User.userid}`);
                 if (about !== null) {
-                    setIsEditable(true),
-                        setEntryHistory(about.entryHistory),
-                        setAboutYou(about.aboutYou),
-                        setExpSkills(about.expSkills),
-                        setPortStyle(about.portStyle),
-                        setHighlight(about.highlight),
-                        setQualifications(about.qualifications),
-                        setServiceProd(about.serviceProd)
+                    setIsEditable(true);
+                    setEntryHistory(about.entryHistory);
+                    setAboutYou(about.aboutYou);
+                    setExpSkills(about.expSkills);
+                    setPortStyle(about.portStyle);
+                    setHighlight(about.highlight);
+                    setQualifications(about.qualifications);
+                    setServiceProd(about.serviceProd);
                 }
             } catch (e) {
                 console.log(e)

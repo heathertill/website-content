@@ -30,13 +30,13 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
             try {
                 let seoContent = await json(`/api/seoContentInfo/${User.userid}`)
                 if (seoContent !== null) {
-                    setIsEditable(true),
-                        setKnownFor(seoContent.knownFor),
-                        setFound(seoContent.found),
-                        setBlog(seoContent.blog),
-                        setSocialMedia(seoContent.socialMedia),
-                        setEmailCamp(seoContent.emailCamp),
-                        setEmailService(seoContent.emailService)
+                    setIsEditable(true);
+                    setKnownFor(seoContent.knownFor);
+                    setFound(seoContent.found);
+                    setBlog(seoContent.blog);
+                    setSocialMedia(seoContent.socialMedia);
+                    setEmailCamp(seoContent.emailCamp);
+                    setEmailService(seoContent.emailService);
                     if (seoContent.socialMedia !== 'no') {
                         setShowSM(true)
                     }

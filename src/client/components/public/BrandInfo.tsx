@@ -22,13 +22,13 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
             try {
                 let brand = await json(`/api/brandInfo/${User.userid}`)
                 if (brand !== null) {
-                    setIsEditable(true)
-                    setPurpose(brand.purpose),
-                        setAudience(brand.audience),
-                        setCompetition(brand.competition),
-                        setSiteAction(brand.siteAction),
-                        setTagline(brand.tagline),
-                        setGreatness(brand.greatness)
+                    setIsEditable(true);
+                    setPurpose(brand.purpose);
+                    setAudience(brand.audience);
+                    setCompetition(brand.competition);
+                    setSiteAction(brand.siteAction);
+                    setTagline(brand.tagline);
+                    setGreatness(brand.greatness);
                 }
             } catch (e) {
                 console.log(e)

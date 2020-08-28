@@ -3,7 +3,7 @@ import queries from '../../db';
 
 const router = Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     let id = req.params.id;
     try {
         const [getContactInfo] = await queries.ContactInfo.getContactInfo(id);

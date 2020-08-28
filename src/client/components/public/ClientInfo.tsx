@@ -22,12 +22,12 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
             try {
                 let client = await json(`/api/clientInfo/${User.userid}`)
                 if (client !== null) {
-                    setIsEditable(true)
-                    setFirstName(client.firstName),
-                    setLastName(client.lastName),
-                    setWorkNumber(client.workNumber),
-                    setCellNumber(client.cellNumber),
-                    setEmail(client.email)
+                    setIsEditable(true);
+                    setFirstName(client.firstName);
+                    setLastName(client.lastName);
+                    setWorkNumber(client.workNumber);
+                    setCellNumber(client.cellNumber);
+                    setEmail(client.email);
                 }
             } catch (e) {
                 console.log(e)
@@ -62,12 +62,12 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
             try {
                 let editInfo = await json(`/api/clientInfo/${User.userid}`, 'PUT', body)
                 if (editInfo) {
-                wayToGo('Client info has been edited!')
+                    wayToGo('Client info has been edited!')
                     history.push('/');
                     setTimeout(() => {
                         location.reload();
                     }, 1500);
-            }
+                }
             } catch (e) {
                 console.log(e)
             }

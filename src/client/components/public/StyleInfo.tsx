@@ -33,16 +33,16 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                 let getStyle = await json(`/api/styleInfo/${User.userid}`)
                 if (getStyle !== null) {
                     setIsEditable(true)
-                    setLogo(getStyle.logo),
-                        setStyle(getStyle.style),
-                        setColor(getStyle.color),
-                        setStandards(getStyle.standards),
-                        setPrintMaterial(getStyle.printMaterial),
-                        setFonts(getStyle.fonts),
-                        setPhotoService(getStyle.photoService),
-                        setWebsites(getStyle.websites),
-                        setWebLikesDis(getStyle.webLikesDis),
-                        radioChecked(getStyle.logo, setMark)
+                    setLogo(getStyle.logo);
+                    setStyle(getStyle.style);
+                    setColor(getStyle.color);
+                    setStandards(getStyle.standards);
+                    setPrintMaterial(getStyle.printMaterial);
+                    setFonts(getStyle.fonts);
+                    setPhotoService(getStyle.photoService);
+                    setWebsites(getStyle.websites);
+                    setWebLikesDis(getStyle.webLikesDis);
+                    radioChecked(getStyle.logo, setMark);
                     if (getStyle.features === null) {
                         setFeatures(features)
                     }
@@ -131,9 +131,9 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                     <div>Do you want to use a logo?</div>
                     <div className="form-check-inline" id="logoRadio"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.value)}>
-                        <input type="radio" id="yes Logo" className="form-check-input mx-2" value="yes" name="logoChoice"  />
+                        <input type="radio" id="yes Logo" className="form-check-input mx-2" value="yes" name="logoChoice" />
                         <label htmlFor="existingWeb" className="form-check-label">Yes</label>
-                        <input type="radio" id="no Logo" className="form-check-input mx-2" value="no" name="logoChoice"  />
+                        <input type="radio" id="no Logo" className="form-check-input mx-2" value="no" name="logoChoice" />
                         <label htmlFor="existingWeb" className="form-check-label">No</label>
                     </div>
                 </div>

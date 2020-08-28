@@ -20,11 +20,11 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
             try {
                 let landing = await json(`/api/landingInfo/${User.userid}`)
                 if (landing !== null) {
-                    setIsEditable(true),
-                        setSiteEntry(landing.siteEntry),
-                        setBranding(landing.branding),
-                        setCallToAction(landing.callToAction),
-                        setSimWebFunc(landing.simWebFunc)
+                    setIsEditable(true);
+                    setSiteEntry(landing.siteEntry);
+                    setBranding(landing.branding);
+                    setCallToAction(landing.callToAction);
+                    setSimWebFunc(landing.simWebFunc);
                 }
             } catch (e) {
                 console.log(e)
