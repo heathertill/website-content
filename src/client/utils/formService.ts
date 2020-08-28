@@ -18,10 +18,10 @@ export const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, uri: str
 };
 
 export const handleGet = async (uri: string, setter: any) => {
-    console.log('ding')
     try {
         let results = await json(uri);
         setter(results)
+        console.log('results', results)
     } catch (e) {
         console.log(e)
     }
