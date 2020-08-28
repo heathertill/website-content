@@ -7,7 +7,7 @@ import { wayToGo } from '../../utils/formService';
 
 export interface ContactInfoProps extends RouteComponentProps { }
 
-const ContactInfo: React.SFC<ContactInfoProps> = ({history}) => {
+const ContactInfo: React.SFC<ContactInfoProps> = ({ history }) => {
 
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
@@ -42,54 +42,47 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({history}) => {
 
     useEffect(() => { canEdit() }, []);
 
-    const handleSubmit = () => {
-        
-    }
 
-    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     let body = {
-    //         userid: User.userid,
-    //         address,
-    //         email,
-    //         workPhone,
-    //         otherPhone,
-    //         linkedin,
-    //         insta,
-    //         facebook,
-    //         otherSocial
-    //     }
-    //     console.log('body', body)
-    //     if (isEditable === false) {
-    //         try {
-    //             console.log('ding')
-    //             let newContact = await json('/api/contactInfo', 'POST', body);
-    //             if (newContact) {
-    //                 console.log('newContact')
-    //                 // history.push('/NewClient');
-    //                 // setTimeout(() => {
-    //                 //     location.reload();
-    //                 // }, 1500);
-    //             }
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-    //     } else {
-    //         try {
-    //             let editContact = await json(`/api/contactInfo/${User.userid}`, 'PUT', body);
-    //             if (editContact) {
-    //                 console.log('editContact')
-    //                 // wayToGo('Contact info has been edited')
-    //                 // history.push('/');
-    //                 // setTimeout(() => {
-    //                 //     location.reload();
-    //                 // }, 1500);
-    //             }
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-    //     }
-    // }
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        let body = {
+            userid: User.userid,
+            address,
+            email,
+            workPhone,
+            otherPhone,
+            linkedin,
+            insta,
+            facebook,
+            otherSocial
+        }
+        if (isEditable === false) {
+            try {
+                let newContact = await json('/api/contactInfo', 'POST', body);
+                if (newContact) {
+                    history.push('/NewClient');
+                    location.reload();
+
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            try {
+                let editContact = await json(`/api/contactInfo/${User.userid}`, 'PUT', body);
+                if (editContact) {
+                    console.log('editContact')
+                    wayToGo('Contact info has been edited')
+                    history.push('/');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
 
     return (
         <section>
@@ -140,8 +133,8 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({history}) => {
                     <input className="form-control" type="text" value={otherSocial} placeholder={otherSocial}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setOtherSocial(e.target.value)} />
                 </div>
+                <SubmitEdit editable={isEditable} />
             </form>
-            <SubmitEdit editable={isEditable} />
         </section>
     );
 }
