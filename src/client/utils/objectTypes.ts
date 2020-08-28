@@ -59,7 +59,9 @@ export interface Site {
     hostName: string,
     domain: string,
     siteManager: string,
-    updateFreq: string
+    updateFreq: string,
+    budget: string,
+    completion: string
 }
 
 export interface Style {

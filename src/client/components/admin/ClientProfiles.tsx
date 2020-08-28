@@ -13,7 +13,13 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
 
     const [clients, setClients] = useState<Client[]>([]);
     const [client, setClient] = useState<Client>();
-    const [site, setSite] = useState<Site[]>()
+    const [site, setSite] = useState<Site>({
+        webName: '',
+        hostName: '',
+        domain: '',
+        siteManager: '',
+        updateFreq: ''
+    });
     const [show, setShow] = useState(false);
 
 
@@ -21,29 +27,22 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
     const getClient = async (e: any) => {
         try {
             let client = await json(`/api/clientInfo/${e}`);
-            console.log('site1', site)
             if (client) {
                 setClient(client)
                 setShow(true)
-                let getSite = handleGet(`/api/siteInfo/${e}`, setSite)
-                console.log('test', site)
-                console.log('site2', site)
-
-                console.log('site', site)
-                console.log('client', client)
+                handleGet(`/api/siteInfo/${e}`, setSite)
             }
         } catch (e) {
             console.log(e)
         }
     }
 
-    const testFunc = () => {
-        let getSite = handleGet('/api/siteInfo/2', setSite)
-        console.log('site', site)
-    }
 
 
-    useEffect(() => { handleGet('/api/clientInfo', setClients), testFunc }, [])
+
+
+
+    useEffect(() => { handleGet('/api/clientInfo', setClients) }, [])
 
     return (
         <div>
@@ -58,15 +57,31 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                     })}
                 </select>
             </div>
-            <h2>Client Info</h2>
+            <h2>Client Profile</h2>
             {show ?
-                <div className="border my-3">
-                    <div className="p-2 m-3">Name: {client.firstName} {client.lastName}</div>
-                    {/* <div className="border p-2 m-3">Last Name: {client.}</div> */}
-                    <div className="p-2 m-3">Work number: {client.workNumber}</div>
-                    <div className="p-2 m-3">Cell number: {client.cellNumber}</div>
-                    <div className="p-2 m-3">email: {client.email}</div>
+                <div>
+                    <div>
+                        <h3>Client Info</h3>
+                        <div className="border my-3">
+                            <div className="p-2 m-3">Name: {client.firstName} {client.lastName}</div>
+                            {/* <div className="border p-2 m-3">Last Name: {client.}</div> */}
+                            <div className="p-2 m-3">Work number: {client.workNumber}</div>
+                            <div className="p-2 m-3">Cell number: {client.cellNumber}</div>
+                            <div className="p-2 m-3">email: {client.email}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Site Info</h3>
+                        <div className="border my-3">
+                        <div className="p-2 m-3">Existing Website: {site.webName}</div>
+                        <div className="p-2 m-3">Hosting Service: {site.hostName}</div>
+                        <div className="p-2 m-3">Domain Name: {site.domain}</div>
+                        <div className="p-2 m-3">Website Manager: {site.siteManager}</div>
+                        <div className="p-2 m-3">Update Frequency: {site.updateFreq}</div>
+                        </div>
+                    </div>
                 </div>
+
                 : null}
 
 

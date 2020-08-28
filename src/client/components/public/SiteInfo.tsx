@@ -18,6 +18,8 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [domain, setDomain] = useState('');
     const [siteManager, setSiteManager] = useState('');
     const [updateFreq, setUpdateFreq] = useState('');
+    const [budget, setBudget] = useState('');
+    const [completion, setCompletion] = useState('');
     const [show, setShow] = useState(false);
     const [showDom, setShowDom] = useState(false);
     const [showDomName, setShowDomName] = useState(false);
@@ -29,12 +31,14 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             try {
                 let site = await json(`/api/siteInfo/${User.userid}`)
                 if (site !== null) {
-                    setIsEditable(true)
-                    setWebName(site.webName),
-                        setHostName(site.hostName),
-                        setDomain(site.domain),
-                        setSiteManager(site.siteManager),
-                        setUpdateFreq(site.updateFreq)
+                    setIsEditable(true);
+                    setWebName(site.webName);
+                    setHostName(site.hostName);
+                    setDomain(site.domain);
+                    setSiteManager(site.siteManager);
+                    setUpdateFreq(site.updateFreq);
+                    setBudget(site.budget);
+                    setCompletion(site.completion);
                 }
                 if (site.webName !== 'no') {
                     setShow(true)
@@ -57,7 +61,9 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             hostName,
             domain,
             siteManager,
-            updateFreq
+            updateFreq,
+            budget,
+            completion
         }
         if (isEditable === false) {
             try {
@@ -162,6 +168,16 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                         <label htmlFor="">How frequently do you intend to update your website?</label>
                         <input type="text" className="form-control" value={updateFreq}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUpdateFreq(e.target.value)} />
+                    </div>
+                    <div>
+                        <label htmlFor="">What is your budget for this project?</label>
+                        <input type="text" className="form-control" value={budget}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBudget(e.target.value)} />
+                    </div>
+                    <div>
+                        <label htmlFor="">What is your desired completion date?</label>
+                        <input type="text" className="form-control" value={completion}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCompletion(e.target.value)} />
                     </div>
                 </div>
                 <SubmitEdit editable={isEditable} />
