@@ -52,7 +52,9 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
                 let newInfo = await json('/api/clientInfo', 'POST', body)
                 if (newInfo) {
                     history.push('/NewClient');
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
                 }
             } catch (e) {
                 console.log(e)

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom'
 import { User, json } from '../../utils/api';
 import SubmitEdit from '../../utils/submitEdit';
+import { wayToGo } from '../../utils/formService';
 
-export interface ContactInfoProps { }
+export interface ContactInfoProps extends RouteComponentProps { }
 
-const ContactInfo: React.SFC<ContactInfoProps> = () => {
+const ContactInfo: React.SFC<ContactInfoProps> = ({history}) => {
 
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
@@ -43,15 +45,41 @@ const ContactInfo: React.SFC<ContactInfoProps> = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        let body = {
+            userid: User.userid,
+            address,
+            email,
+            workPhone,
+            otherPhone,
+            linkedin,
+            insta,
+            facebook,
+            otherSocial
+        }
+        console.log('body', body)
         if (isEditable === false) {
             try {
-                
+                console.log('ding')
+                let newContact = await json('/api/contactInfo', 'POST', body);
+                if (newContact) {
+                    history.push('/NewClient');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                }
             } catch (e) {
                 console.log(e)
             }
         } else {
             try {
-                
+                let editContact = await json(`/api/contactInfo/${User.userid}`, 'PUT', body);
+                if (editContact) {
+                    wayToGo('Contact info has been edited')
+                    history.push('/NewClient');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                }
             } catch (e) {
                 console.log(e)
             }
@@ -61,6 +89,12 @@ const ContactInfo: React.SFC<ContactInfoProps> = () => {
     return (
         <section>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+                <div className="my-3">
+                    <h1>Contact Information</h1>
+                    <div className="mt-3 mb-5">
+                        <h3>This it the information that will appear on your website.</h3>
+                    </div>
+                </div>
                 <div className="my-3" >
                     <label htmlFor="address">Physical Address</label>
                     <input className="form-control" type="text" value={address} placeholder={address}
