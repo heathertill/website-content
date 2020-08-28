@@ -3,7 +3,6 @@ import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
 import '../scss/app';
 
-import ClientInfo from '../components/public/ClientInfo';
 import Navbar from '../components/shared/Navbar';
 import Jumbo from '../components/shared/Jumbo';
 import Login from '../components/admin/Login';

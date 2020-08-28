@@ -90,7 +90,7 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({ history }) => {
                 <div className="my-3">
                     <h1>Contact Information</h1>
                     <div className="mt-3 mb-5">
-                        <h3>This it the information that will appear on your website.</h3>
+                        <h3>This is the information that will appear on your website.</h3>
                     </div>
                 </div>
                 <div className="my-3" >

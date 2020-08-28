@@ -1,6 +1,7 @@
 import { json } from './api';
 import { RouteComponentProps } from 'react-router-dom'
 
+
 import Swal from 'sweetalert2';
 
 export const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, uri: string, method: string, body: any) => {
@@ -15,6 +16,16 @@ export const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, uri: str
         console.log(e)
     }
 };
+
+export const handleGet = async (uri: string, setter: any) => {
+    console.log('ding')
+    try {
+        let results = await json(uri);
+        setter(results)
+    } catch (e) {
+        console.log(e)
+    }
+}
 
 export const radioChecked = (radioValue: string, setRadio: any) => {
     if (radioValue === 'yes') {
@@ -31,7 +42,7 @@ export const wayToGo = (message?: string, then?: any) => {
         showConfirmButton: false,
         onClose: () => {
             then;
-        } 
+        }
     })
 }
 

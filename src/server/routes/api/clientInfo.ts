@@ -3,6 +3,16 @@ import queries from '../../db';
 
 const router = Router();
 
+router.get('/', async (req, res, next) => {
+    try {
+        let clients = await queries.ClientInfo.getAllClientInfo();
+        res.json(clients)
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500)
+    }
+})
+
 router.get('/:id', async (req, res, next) => {
     let id = req.params.id;
     try {

@@ -76,6 +76,12 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
 
     return (
         <section>
+            <div className="my-3">
+                <h1 className="mb-3">Client Information</h1>
+                <div className="my-3">
+                    <h3>Who should we contact about the website being devloped?</h3>
+                </div>
+            </div>
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor="firstName">First Name</label>
                 <input className="form-control" type="text" value={firstName} placeholder={firstName}

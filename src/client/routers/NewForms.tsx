@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Switch, BrowserRouter, Route, withRouter } from 'react-router-dom';
 
-import LandingPage from '../components/public/LandingInfo';
+import '../scss/app';
+
 import ClientInfo from '../components/public/ClientInfo';
 import SiteInfo from '../components/public/SiteInfo';
 import BrandInfo from '../components/public/BrandInfo';
