@@ -51,6 +51,13 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                     })}
                 </select>
             </div>
+            <form className="form-group" >
+                <div>
+                    <label htmlFor="" > </label>
+                    <input className="form-control" type="text" value={} placeholder={}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+                </div>
+            </form>
 
         </div>
     );
