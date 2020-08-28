@@ -38,6 +38,7 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
     useEffect(() => { canEdit() }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         let body = {
             userid: User.userid,
             firstName,
@@ -46,7 +47,6 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
             cellNumber,
             email
         }
-        e.preventDefault();
         if (isEditable === false) {
             try {
                 let newInfo = await json('/api/clientInfo', 'POST', body)

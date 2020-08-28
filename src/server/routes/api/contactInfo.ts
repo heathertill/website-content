@@ -15,6 +15,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
+    console.log('api router')
     let body = req.body;
     try {
         const newContactInfo = await queries.ContactInfo.newContactInfo(body);

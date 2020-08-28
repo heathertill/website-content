@@ -23,7 +23,7 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({history}) => {
         if (User.userid) {
             try {
                 let contact = await json(`/api/contactInfo/${User.userid}`)
-                if (contact) {
+                if (contact !== null) {
                     setIsEditable(true);
                     setAddress(contact.address);
                     setEmail(contact.email);
@@ -33,7 +33,6 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({history}) => {
                     setInsta(contact.insta);
                     setFacebook(contact.facebook);
                     setOtherSocial(contact.otherSocial);
-
                 }
             } catch (e) {
                 console.log(e)
@@ -43,48 +42,54 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({history}) => {
 
     useEffect(() => { canEdit() }, []);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        let body = {
-            userid: User.userid,
-            address,
-            email,
-            workPhone,
-            otherPhone,
-            linkedin,
-            insta,
-            facebook,
-            otherSocial
-        }
-        console.log('body', body)
-        if (isEditable === false) {
-            try {
-                console.log('ding')
-                let newContact = await json('/api/contactInfo', 'POST', body);
-                if (newContact) {
-                    history.push('/NewClient');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        } else {
-            try {
-                let editContact = await json(`/api/contactInfo/${User.userid}`, 'PUT', body);
-                if (editContact) {
-                    wayToGo('Contact info has been edited')
-                    history.push('/NewClient');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        }
+    const handleSubmit = () => {
+        
     }
+
+    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     let body = {
+    //         userid: User.userid,
+    //         address,
+    //         email,
+    //         workPhone,
+    //         otherPhone,
+    //         linkedin,
+    //         insta,
+    //         facebook,
+    //         otherSocial
+    //     }
+    //     console.log('body', body)
+    //     if (isEditable === false) {
+    //         try {
+    //             console.log('ding')
+    //             let newContact = await json('/api/contactInfo', 'POST', body);
+    //             if (newContact) {
+    //                 console.log('newContact')
+    //                 // history.push('/NewClient');
+    //                 // setTimeout(() => {
+    //                 //     location.reload();
+    //                 // }, 1500);
+    //             }
+    //         } catch (e) {
+    //             console.log(e)
+    //         }
+    //     } else {
+    //         try {
+    //             let editContact = await json(`/api/contactInfo/${User.userid}`, 'PUT', body);
+    //             if (editContact) {
+    //                 console.log('editContact')
+    //                 // wayToGo('Contact info has been edited')
+    //                 // history.push('/');
+    //                 // setTimeout(() => {
+    //                 //     location.reload();
+    //                 // }, 1500);
+    //             }
+    //         } catch (e) {
+    //             console.log(e)
+    //         }
+    //     }
+    // }
 
     return (
         <section>
