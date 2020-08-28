@@ -18,7 +18,8 @@ export interface Client {
 const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
 
     const [clients, setClients] = useState<Client[]>([]);
-    const [client, setClient] = useState<Client>()
+    const [client, setClient] = useState<Client>();
+    const [show, setShow] = useState(false);
 
 
 
@@ -27,6 +28,7 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
             let client = await json(`/api/clientInfo/${e}`);
             if (client) {
                 setClient(client)
+                setShow(true)
                 console.log(client)
             }
         } catch (e) {
@@ -51,13 +53,17 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                     })}
                 </select>
             </div>
-            <form className="form-group" >
-                <div>
-                    <label htmlFor="" > </label>
-                    <input className="form-control" type="text" value={} placeholder={}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => set(e.target.value)} />
+            <h2>Client Info</h2>
+            {show ?
+                <div className="border my-3">
+                    <div className="p-2 m-3">Name: {client.firstName} {client.lastName}</div>
+                    {/* <div className="border p-2 m-3">Last Name: {client.}</div> */}
+                    <div className="p-2 m-3">Work number: {client.workNumber}</div>
+                    <div className="p-2 m-3">Cell number: {client.cellNumber}</div>
+                    <div className="p-2 m-3">email: {client.email}</div>
                 </div>
-            </form>
+                : null}
+
 
         </div>
     );
