@@ -22,7 +22,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
     const [showDom, setShowDom] = useState(false);
     const [showDomName, setShowDomName] = useState(false);
     const [isEditable, setIsEditable] = useState(false);
-  
+
 
     const canEdit = async () => {
         if (User.userid) {

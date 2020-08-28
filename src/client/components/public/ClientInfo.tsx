@@ -8,6 +8,7 @@ import SubmitEdit from '../../utils/submitEdit';
 
 export interface ClientInfoProps extends RouteComponentProps<{ id: string }> { }
 
+
 const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id } } }) => {
 
     const [firstName, setFirstName] = useState('');

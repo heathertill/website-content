@@ -3,17 +3,11 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { handleGet } from '../../utils/formService';
 import { json } from '../../utils/api';
+import { Client, About, Brand } from '../../utils/objectTypes';
 
 export interface ClientProfilesProps extends RouteComponentProps { }
 
-export interface Client {
-    userid: number,
-    firstName: string,
-    lastName: string,
-    workNumber: string,
-    cellNumber: string,
-    email: string
-}
+
 
 const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
 
@@ -38,7 +32,7 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
 
 
 
-    useEffect(() => { handleGet('/api/clientInfo', setClients) }, [])
+    useEffect(() => { handleGet('/api/clientInfo', setClients), handleGet() }, [])
 
     return (
         <div>

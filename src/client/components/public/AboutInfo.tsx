@@ -8,20 +8,8 @@ import SubmitEdit from '../../utils/submitEdit';
 
 export interface AboutInfoProps extends RouteComponentProps { }
 
-export interface About {
-    userid: number,
-    entryHistory: string,
-    aboutYou: string,
-    expSkills: string,
-    portStyle: string,
-    highlight: string,
-    qualifications: string,
-    serviceProd: string
-}
-
 const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
 
-    const [about, setAbout] = useState<About[]>();
     const [entryHistory, setEntryHistory] = useState('');
     const [aboutYou, setAboutYou] = useState('');
     const [expSkills, setExpSkills] = useState('');
