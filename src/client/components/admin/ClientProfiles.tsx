@@ -65,7 +65,17 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
         socialMedia: '',
         emailCamp: '',
         emailService: ''
-    })
+    });
+    const [contact, setContact] = useState<Contact>({
+        address: '',
+        email: '',
+        workPhone: '',
+        otherPhone: '',
+        linkedin: '',
+        insta: '',
+        facebook: '',
+        otherSocial: ''
+    });
 
     const [show, setShow] = useState(false);
 
@@ -83,6 +93,7 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                 handleGet(`/api/landingInfo/${e}`, setLanding);
                 handleGet(`/api/aboutInfo/${e}`, setAbout);
                 handleGet(`/api/seoContentInfo/${e}`, setSeoContent);
+                handleGet(`/api/contactInfo/${e}`, setContact);
             }
         } catch (e) {
             console.log(e)
@@ -182,28 +193,32 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                     <div>
                         <h3>SEO Content Info</h3>
                         <div className="border my-3">
-                            <div className="p-2 m-3">Know {}</div>
-                            <div className="p-2 m-3"> {}</div>
-                            <div className="p-2 m-3"> {}</div>
-                            <div className="p-2 m-3"> {}</div>
-                            <div className="p-2 m-3"> {}</div>
-                            <div className="p-2 m-3"> {}</div>
+                            <div className="p-2 m-3">Know for: {seoContent.knownFor}</div>
+                            <div className="p-2 m-3">How to be found: {seoContent.found}</div>
+                            <div className="p-2 m-3">Blog: {seoContent.blog}</div>
+                            <div className="p-2 m-3">Maintain social media? Who? {seoContent.socialMedia}</div>
+                            <div className="p-2 m-3">Current email service? {seoContent.emailService}</div>
+                            <div className="p-2 m-3">Active email campaign? {seoContent.emailCamp}</div>
                         </div>
                     </div>
-
+                    <div>
+                        <h3>Contact Info</h3>
+                        <div className="border my-3">
+                            <div className="p-2 m-3">Address: {contact.address}</div>
+                            <div className="p-2 m-3">Email {contact.email}</div>
+                            <div className="p-2 m-3">Work phone: {contact.workPhone}</div>
+                            <div className="p-2 m-3">Other phone: {contact.otherPhone}</div>
+                            <div className="p-2 m-3">Linkedin: {contact.linkedin}</div>
+                            <div className="p-2 m-3">Instagram: {contact.insta}</div>
+                            <div className="p-2 m-3">Facebook {contact.facebook}</div>
+                            <div className="p-2 m-3">Other social media: {contact.otherSocial}</div>
+                        </div>
+                    </div>
                 </div>
 
                 : null}
 
-            {/* <div>
-                <h3></h3>
-                <div className="border my-3">
-                    <div className="p-2 m-3"> {}</div>
-                    <div className="p-2 m-3"> {}</div>
-                    <div className="p-2 m-3"> {}</div>
-                    <div className="p-2 m-3"> {}</div>
-                </div>
-            </div> */}
+
         </div>
     );
 }
