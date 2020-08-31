@@ -72,26 +72,27 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
 
     return (
         <section>
-            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+            <h1 className="mb-3">Landing Informaion Page</h1>
+            <form className="form-group mx-4" onSubmit={(e) => handleSubmit(e)}>
                 <div className="my-3">
                     <label htmlFor="siteEntry" >Site entry: How do you want the site to flow? Landing page with a Call to Action link on the opening page? Limited navigation menu on landing page? Continuous scrolling with visible navigation bar?</label>
-                    <input className="form-control" type="text" value={siteEntry} placeholder={siteEntry}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteEntry(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={siteEntry} placeholder={siteEntry}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSiteEntry(e.target.value)} ></textarea>
                 </div>
                 <div className="my-3">
                     <label htmlFor="branding" >What images or branding do you want to be on your landing page?</label>
-                    <input className="form-control" type="text" value={branding} placeholder={branding}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBranding(e.target.value)} />
+                    <textarea className="form-control" rows={3} value={branding} placeholder={branding}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBranding(e.target.value)} ></textarea>
                 </div>
                 <div className="my-3">
                     <label htmlFor="callToAction" >What is your call to action statement/purpose? Contact me about... Follow me.... Sign up...</label>
-                    <input className="form-control" type="text" value={callToAction} placeholder={callToAction}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCallToAction(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={callToAction} placeholder={callToAction}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCallToAction(e.target.value)} ></textarea>
                 </div>
                 <div className="my-3">
                     <label htmlFor="simWebFunc" >Have you seen any particular website navigation features you like on other websites?  If so, list the url and explain what you like about it below.</label>
-                    <input className="form-control" type="text" value={simWebFunc} placeholder={simWebFunc}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSimWebFunc(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={simWebFunc} placeholder={simWebFunc}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSimWebFunc(e.target.value)} ></textarea>
                 </div>
                 <SubmitEdit editable={isEditable} />
             </form>

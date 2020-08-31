@@ -4,9 +4,6 @@ import { RouteComponentProps } from 'react-router-dom';
 import { User, json } from '../../utils/api';
 import { wayToGo } from '../../utils/formService';
 import SubmitEdit from '../../utils/submitEdit';
-import DomainRadio from '../radio/DomainRadio';
-import WebRadio from '../radio/WebRadio';
-import LogoRadio from '../radio/LogoRadio';
 import Radio from '../../utils/radio';
 
 export interface SiteInfoProps extends RouteComponentProps { }
@@ -97,8 +94,8 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             setShow(true);
             setShowDom(false);
         } else {
-            setWebName('no');
-            setHostName('no');
+            setWebName('');
+            setHostName('');
             setShowDom(true);
             setShow(false);
         }
@@ -110,18 +107,19 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             setShowDomName(true)
         } else {
             setShowDomName(false)
-            setDomain('no')
+            setDomain('')
         }
     }
 
-    let message = 'test';
+    let siteMessage = 'Do you have an existing website?';
+    let domainMessage = 'Do you have a domain?';
 
     return (
         <section>
-            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+            <h1 className="mb-3">Site Information</h1>
+            <form className="form-group mx-4" onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <WebRadio handlers={{ handleWeb }} />
-                    {/* <Radio handlers={{function: handleWeb}} values={{message}} /> */}
+                    <Radio handlers={{function: handleWeb}} values={{message: siteMessage}} name={{radioName: 'siteRadio'}} />
                     <div>
                         {show ? <div>
                             <div>
@@ -145,7 +143,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
                 <div>
                     {showDom ?
                         <div>
-                            <DomainRadio handlers={{ handleDomain }} />
+                            <Radio handlers={{function: handleDomain}} values={{message: domainMessage}} name={{radioName: 'domainRadio'}} />
                         </div>
                         : null}
                 </div>

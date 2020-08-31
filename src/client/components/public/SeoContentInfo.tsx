@@ -126,13 +126,13 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
             <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
                 <div className="my-3">
                     <label htmlFor="knownFor">What do you want to be associated with? Known for?</label>
-                    <input className="form-control" type="text" value={knownFor} placeholder={knownFor}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKnownFor(e.target.value)} />
+                    <textarea className="form-control" rows={5} value={knownFor} placeholder={knownFor}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setKnownFor(e.target.value)} ></textarea>
                 </div>
                 <div className="my-3">
                     <label htmlFor="found">Why do you want to be found?</label>
-                    <input className="form-control" type="text" value={found} placeholder={found}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFound(e.target.value)} />
+                    <textarea className="form-control" rows={5} value={found} placeholder={found}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFound(e.target.value)} ></textarea>
                 </div>
                 <div className="my-3">
                     <Radio handlers={{ function: handleBlog }} values={{ message: blogMessage }} name={{ radioName: 'blogRadio' }} />
@@ -141,9 +141,9 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
                     <Radio handlers={{ function: handleSMRadio }} values={{ message: mediaMessage }} name={{ radioName: 'socialRadio' }} />
                     {showSM ?
                         <div className="my-3">
-                            <label htmlFor="socialMedia">Please list the social media accounts.</label>
-                            <input className="form-control" type="text" value={socialMedia} placeholder={socialMedia}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSocialMedia(e.target.value)} />
+                            <label htmlFor="socialMedia">Please list the social media accounts you will maintain.</label>
+                            <textarea className="form-control" rows={2} value={socialMedia} placeholder={socialMedia}
+                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSocialMedia(e.target.value)} ></textarea>
                         </div>
                         : null}
                 </div>

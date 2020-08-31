@@ -81,41 +81,42 @@ const AboutInfo: React.SFC<AboutInfoProps> = ({ history }) => {
 
     return (
         <section>
-            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+            <h1 className="mb-3">About Information Form</h1>
+            <form className="form-group mx-4" onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <label htmlFor="entryHistory" >How did you get started?</label>
-                    <input className="form-control" type="text" value={entryHistory} placeholder={entryHistory}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEntryHistory(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={entryHistory} placeholder={entryHistory}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setEntryHistory(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="aboutYou" >What do you want to tell about yourself?</label>
-                    <input className="form-control" type="text" value={aboutYou} placeholder={aboutYou}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAboutYou(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={aboutYou} placeholder={aboutYou}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAboutYou(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="qualifications" >Please list your qualificatons. Degrees, accreditations, etc.</label>
-                    <input className="form-control" type="text" value={qualifications} placeholder={qualifications}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQualifications(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={qualifications} placeholder={qualifications}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setQualifications(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="expSkills" >What are your skills and experience? Previous jobs, hobbies, life experience, etc. that have help build your experience or show your expertice.</label>
-                    <input className="form-control" type="text" value={expSkills} placeholder={expSkills}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExpSkills(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={expSkills} placeholder={expSkills}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setExpSkills(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="portStyle" >How do you want to show your portfolio? A few highlighted items or a large gallery? Do you want any/all items to be links?</label>
-                    <input className="form-control" type="text" value={portStyle} placeholder={portStyle}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPortStyle(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={portStyle} placeholder={portStyle}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPortStyle(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="highlight" >What do you want to highlight? Include items you are proud of and show the depth and breadth of your skills/services.</label>
-                    <input className="form-control" type="text" value={highlight} placeholder={highlight}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHighlight(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={highlight} placeholder={highlight}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setHighlight(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="serviceProd" >What services or products do you offer?</label>
-                    <input className="form-control" type="text" value={serviceProd} placeholder={serviceProd}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setServiceProd(e.target.value)} />
+                    <textarea className="form-control" rows={8} value={serviceProd} placeholder={serviceProd}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setServiceProd(e.target.value)} ></textarea>
                 </div>
                 <SubmitEdit editable={isEditable} />
             </form>

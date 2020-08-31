@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom'
 import SubmitEdit from '../../utils/submitEdit';
 import { wayToGo, radioChecked } from '../../utils/formService';
+import Radio from '../../utils/radio';
 import StyleRadio from '../radio/StyleRadio';
 import PrintRadio from '../radio/PrintRadio';
 import { User, json } from '../../utils/api';
@@ -76,6 +77,15 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
         }
     };
 
+    const handleLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let radioLogo = e.target.value;
+        if (radioLogo === 'yes') {
+            setLogo('yes')
+        } else {
+            setLogo('no')
+        }
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         let strFeatures = features.join(', ');
         let body = {
@@ -124,19 +134,15 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
         (document.getElementById(id) as HTMLInputElement).disabled = true
     };
 
+    let logoMessage = 'Do you want to use a logo?';
+    let printMessage = 'Do you have any established print material? Letterhead, brochures, event materials?';
+    let styleMessage = 'Do you have company style/brand standards?';
+
     return (
         <section>
-            <form className="form-group" onSubmit={(e) => handleSubmit(e)} >
-                <div className="my-4">
-                    <div>Do you want to use a logo?</div>
-                    <div className="form-check-inline" id="logoRadio"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogo(e.target.value)}>
-                        <input type="radio" id="yes Logo" className="form-check-input mx-2" value="yes" name="logoChoice" />
-                        <label htmlFor="existingWeb" className="form-check-label">Yes</label>
-                        <input type="radio" id="no Logo" className="form-check-input mx-2" value="no" name="logoChoice" />
-                        <label htmlFor="existingWeb" className="form-check-label">No</label>
-                    </div>
-                </div>
+            <h1 className="mb-3">Style Information</h1>
+            <form className="form-group mx-4" onSubmit={(e) => handleSubmit(e)} >
+                <Radio handlers={{function: handleLogo}} values={{message: logoMessage}} name={{radioName: 'logoRadio'}} />
                 <div className="my-4">
                     <div>What features are you interested in including on your?</div>
                     <div className="row">
@@ -208,16 +214,17 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                 </div>
                 <div className="my-4">
                     <label htmlFor="text">What style are you looking for? Professional, edgy, modern, calm, minimal, etc. </label>
-                    <input type="text" className="form-control" value={style}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStyle(e.target.value)} />
+                    <textarea rows={3} className="form-control" value={style}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setStyle(e.target.value)} ></textarea>
                 </div>
                 <div className="my-4">
                     <label htmlFor="text">What is your color palette?</label>
-                    <input type="text" className="form-control" value={color}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setColor(e.target.value)} />
+                    <textarea rows={2} className="form-control" value={color}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setColor(e.target.value)} ></textarea>
                 </div>
                 <div className="my-4">
-                    <StyleRadio handlers={{ handleStyle }} />
+                    {/* <StyleRadio handlers={{ handleStyle }} /> */}
+                    <Radio handlers={{function: handleStyle}} />
                     {show ?
                         <div>
                             <label htmlFor="text">Please give a brief discription of your brand standards.</label>
@@ -232,8 +239,8 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                 </div>
                 <div className="my-4">
                     <label htmlFor="text">What font style are you looking for? What fonts do you currently use?</label>
-                    <input type="text" className="form-control" value={fonts}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFonts(e.target.value)} />
+                    <textarea rows={2} className="form-control" value={fonts}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFonts(e.target.value)} ></textarea>
                 </div>
                 <div className="my-4">
                     <div>Do you need professional photography/videography services?</div>
@@ -246,13 +253,13 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                 </div>
                 <div className="my-4">
                     <label htmlFor="text">List 3-5 websites you would like to use as inspiration for your own</label>
-                    <input type="text" className="form-control" value={websites}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebsites(e.target.value)} />
+                    <textarea rows={8} className="form-control" value={websites}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setWebsites(e.target.value)} ></textarea>
                 </div>
                 <div className="my-4">
                     <label htmlFor="text">What do you like about these websites? What do you dislike about these or other websites?</label>
-                    <input type="text" className="form-control" value={webLikesDis}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebLikesDis(e.target.value)} />
+                    <textarea rows={8} className="form-control" value={webLikesDis}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setWebLikesDis(e.target.value)} ></textarea>
                 </div>
                 <SubmitEdit editable={isEditable} />
             </form>

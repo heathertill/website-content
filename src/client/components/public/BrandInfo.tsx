@@ -78,41 +78,42 @@ const BrandInfo: React.SFC<BrandInfoProps> = ({ history }) => {
 
 
     return (
-        <div>
-            <form className="form-group" onSubmit={(e) => handleBrand(e)} >
+        <section>
+            <h1 className="mb-3">Brand Information</h1>
+            <form className="form-group mx-4" onSubmit={(e) => handleBrand(e)} >
                 <div>
                     <label htmlFor="purpose">What is the purpose of your website?</label>
-                    <input type="text" className="form-control" value={purpose}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPurpose(e.target.value)} />
+                    <textarea className="form-control" value={purpose} rows={3}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPurpose(e.target.value)}></textarea>
                 </div>
                 <div >
                     <label htmlFor="audience">Who is your target audience? (Age, industry, income, geographical area, etc.)</label>
-                    <input type="text" className="form-control" value={audience}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAudience(e.target.value)} />
+                    <textarea rows={3} className="form-control" value={audience}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAudience(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="competition">Who is your direct competition?</label>
-                    <input type="text" className="form-control" value={competition}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCompetition(e.target.value)} />
+                    <textarea rows={3} className="form-control" value={competition}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCompetition(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="siteAction">When people visit your website, what do you want them to do? `(Hire your service, join your company, communicate with you, be entertained, etc.)`</label>
-                    <input type="text" className="form-control" value={siteAction}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteAction(e.target.value)} />
+                    <textarea rows={3} className="form-control" value={siteAction}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSiteAction(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="tagline">Tag line - Describe your business in one short sentence. What is your business/website about?</label>
-                    <input type="text" className="form-control" value={tagline}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTagline(e.target.value)} />
+                    <textarea rows={2} className="form-control" value={tagline}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTagline(e.target.value)} ></textarea>
                 </div>
                 <div>
                     <label htmlFor="greatness">What is great about your service?</label>
-                    <input type="text" className="form-control" value={greatness}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGreatness(e.target.value)} />
+                    <textarea rows={3} className="form-control" value={greatness}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setGreatness(e.target.value)} ></textarea>
                 </div>
                 <SubmitEdit editable={isEditable} />
             </form>
-        </div>
+        </section>
 
     );
 }

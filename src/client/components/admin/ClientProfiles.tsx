@@ -5,10 +5,7 @@ import { handleGet } from '../../utils/formService';
 import { json } from '../../utils/api';
 import { Client, Site, Brand, Style, Landing, About, SEOContent, Contact } from '../../utils/objectTypes';
 
-
 export interface ClientProfilesProps extends RouteComponentProps { }
-
-
 
 const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
 
@@ -76,10 +73,7 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
         facebook: '',
         otherSocial: ''
     });
-
     const [show, setShow] = useState(false);
-
-
 
     const getClient = async (e: any) => {
         try {
@@ -267,77 +261,104 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                     <div>
                         <h3>About Info</h3>
                         <div className="border my-3">
-                        <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">How they got started:</div>
+                                <div className="d-inline ml-3">{about.entryHistory}</div>
                             </div>
                             <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
+                                <div className="font-weight-bold d-inline">About the client:</div>
+                                <div className="d-inline ml-3">{about.aboutYou}</div>
                             </div>
                             <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
+                                <div className="font-weight-bold d-inline">Skills and experience:</div>
+                                <div className="d-inline ml-3">{about.expSkills}</div>
                             </div>
                             <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
+                                <div className="font-weight-bold d-inline">How to show portfolio:</div>
+                                <div className="d-inline ml-3">{about.portStyle}</div>
                             </div>
                             <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
+                                <div className="font-weight-bold d-inline">What to highlight:</div>
+                                <div className="d-inline ml-3">{about.highlight}</div>
                             </div>
                             <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
+                                <div className="font-weight-bold d-inline">Qualifications:</div>
+                                <div className="d-inline ml-3">{about.qualifications}</div>
                             </div>
                             <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
-            </div>
-                            {/* <div className="p-2 m-3">How they got started: {about.entryHistory}</div>
-                            <div className="p-2 m-3">About the client: {about.aboutYou}</div>
-                            <div className="p-2 m-3">Skills and experience: {about.expSkills}</div>
-                            <div className="p-2 m-3">How to show portfolio: {about.portStyle}</div>
-                            <div className="p-2 m-3">What to highlignt: {about.highlight}</div>
-                            <div className="p-2 m-3">Qualification: {about.qualifications}</div>
-                            <div className="p-2 m-3">Services and/or products: {about.serviceProd}</div> */}
+                                <div className="font-weight-bold d-inline">Services and/or products:</div>
+                                <div className="d-inline ml-3">{about.serviceProd}</div>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <h3>SEO Content Info</h3>
                         <div className="border my-3">
-                            <div className="p-2 m-3">Know for: {seoContent.knownFor}</div>
-                            <div className="p-2 m-3">How to be found: {seoContent.found}</div>
-                            <div className="p-2 m-3">Blog: {seoContent.blog}</div>
-                            <div className="p-2 m-3">Maintain social media? Who? {seoContent.socialMedia}</div>
-                            <div className="p-2 m-3">Current email service? {seoContent.emailService}</div>
-                            <div className="p-2 m-3">Active email campaign? {seoContent.emailCamp}</div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Known for:</div>
+                                <div className="d-inline ml-3">{seoContent.knownFor}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">How to be found:</div>
+                                <div className="d-inline ml-3">{seoContent.found}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Blog:</div>
+                                <div className="d-inline ml-3">{seoContent.blog}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Maintain social media? Who?:</div>
+                                <div className="d-inline ml-3">{seoContent.socialMedia}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Current email service?:</div>
+                                <div className="d-inline ml-3">{seoContent.emailService}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Active email campaign?:</div>
+                                <div className="d-inline ml-3">{seoContent.emailCamp}</div>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <h3>Contact Info</h3>
                         <div className="border my-3">
-                            <div className="p-2 m-3">Address: {contact.address}</div>
-                            <div className="p-2 m-3">Email {contact.email}</div>
-                            <div className="p-2 m-3">Work phone: {contact.workPhone}</div>
-                            <div className="p-2 m-3">Other phone: {contact.otherPhone}</div>
-                            <div className="p-2 m-3">Linkedin: {contact.linkedin}</div>
-                            <div className="p-2 m-3">Instagram: {contact.insta}</div>
-                            <div className="p-2 m-3">Facebook {contact.facebook}</div>
-                            <div className="p-2 m-3">Other social media: {contact.otherSocial}</div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Address:</div>
+                                <div className="d-inline ml-3">{contact.address}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Email:</div>
+                                <div className="d-inline ml-3">{contact.email}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Work phone:</div>
+                                <div className="d-inline ml-3">{contact.workPhone}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Other phone:</div>
+                                <div className="d-inline ml-3">{contact.otherPhone}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">LinkedIn:</div>
+                                <div className="d-inline ml-3">{contact.linkedin}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Instagram:</div>
+                                <div className="d-inline ml-3">{contact.insta}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Facebook:</div>
+                                <div className="d-inline ml-3">{contact.facebook}</div>
+                            </div>
+                            <div className="m-4">
+                                <div className="font-weight-bold d-inline">Other social media:</div>
+                                <div className="d-inline ml-3">{contact.otherSocial}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
-
                 : null}
-
-            {/* <div className="m-4">
-                <div className="font-weight-bold d-inline">:</div>
-                <div className="d-inline ml-3">{}</div>
-            </div> */}
         </div>
     );
 }

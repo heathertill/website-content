@@ -94,8 +94,8 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({ history }) => {
                 </div>
                 <div className="my-3" >
                     <label htmlFor="address">Physical Address</label>
-                    <input className="form-control" type="text" value={address} placeholder={address}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)} />
+                    <textarea className="form-control" rows={4} value={address} placeholder={address}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAddress(e.target.value)} ></textarea>
                 </div>
                 <div className="my-3" >
                     <label htmlFor="email">Email Address</label>

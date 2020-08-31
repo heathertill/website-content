@@ -77,27 +77,27 @@ const ClientInfo: React.SFC<ClientInfoProps> = ({ history, match: { params: { id
 
     return (
         <section>
-            <div className="my-3">
+            <div>
                 <h1 className="mb-3">Client Information</h1>
                 <div className="my-3">
-                    <h3>Who should we contact about the website being devloped?</h3>
+                    <h3 className="mb-3">Who should we contact about the website being devloped?</h3>
                 </div>
             </div>
-            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+            <form className="form-group mx-4" onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor="firstName">First Name</label>
-                <input className="form-control" type="text" value={firstName} placeholder={firstName}
+                <input className="form-control mb-3" type="text" value={firstName} placeholder={firstName}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)} />
                 <label htmlFor="lastName">Last Name</label>
-                <input className="form-control" type="text" value={lastName} placeholder={lastName}
+                <input className="form-control mb-3" type="text" value={lastName} placeholder={lastName}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)} />
                 <label htmlFor="workNumber">Work Number</label>
-                <input className="form-control" type="text" value={workNumber} placeholder={workNumber}
+                <input className="form-control mb-3" type="text" value={workNumber} placeholder={workNumber}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWorkNumber(e.target.value)} />
                 <label htmlFor="cellNumber">Cell Number</label>
-                <input className="form-control" type="text" value={cellNumber} placeholder={cellNumber}
+                <input className="form-control mb-3" type="text" value={cellNumber} placeholder={cellNumber}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCellNumber(e.target.value)} />
                 <label htmlFor="email">Email</label>
-                <input className="form-control" type="text" value={email} placeholder={email}
+                <input className="form-control mb-3" type="text" value={email} placeholder={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
                 <SubmitEdit editable={isEditable} />
             </form>
