@@ -21,7 +21,6 @@ export const handleGet = async (uri: string, setter: any) => {
     try {
         let results = await json(uri);
         setter(results)
-        console.log('results', results)
     } catch (e) {
         console.log(e)
     }

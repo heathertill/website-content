@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { handleGet } from '../../utils/formService';
 import { json } from '../../utils/api';
-import { Client, About, Brand, Site } from '../../utils/objectTypes';
+import { Client, Site, Brand, Style, Landing, About, SEOContent, Contact } from '../../utils/objectTypes';
 
 export interface ClientProfilesProps extends RouteComponentProps { }
 
@@ -18,8 +18,31 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
         hostName: '',
         domain: '',
         siteManager: '',
-        updateFreq: ''
+        updateFreq: '',
+        budget: '',
+        completion: ''
     });
+    const [brand, setBrand] = useState<Brand>({
+        purpose: '',
+        audience: '',
+        competition: '',
+        siteAction: '',
+        tagLine: '',
+        greatness: ''
+    });
+    const [style, setStyle] = useState<Style>({
+        logo: '',
+        style: '',
+        color: '',
+        standards: '',
+        printMaterials: '',
+        fonts: '',
+        photoService: '',
+        websites: '',
+        webLikesDis: '',
+        features: ''
+    })
+
     const [show, setShow] = useState(false);
 
 
@@ -30,7 +53,9 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
             if (client) {
                 setClient(client)
                 setShow(true)
-                handleGet(`/api/siteInfo/${e}`, setSite)
+                handleGet(`/api/siteInfo/${e}`, setSite);
+                handleGet(`/api/brandInfo/${e}`, setBrand);
+                handleGet(`/api/styleInfo/${e}`, setStyle);
             }
         } catch (e) {
             console.log(e)
@@ -73,18 +98,52 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                     <div>
                         <h3>Site Info</h3>
                         <div className="border my-3">
-                        <div className="p-2 m-3">Existing Website: {site.webName}</div>
-                        <div className="p-2 m-3">Hosting Service: {site.hostName}</div>
-                        <div className="p-2 m-3">Domain Name: {site.domain}</div>
-                        <div className="p-2 m-3">Website Manager: {site.siteManager}</div>
-                        <div className="p-2 m-3">Update Frequency: {site.updateFreq}</div>
+                            <div className="p-2 m-3">Existing Website: {site.webName}</div>
+                            <div className="p-2 m-3">Hosting Service: {site.hostName}</div>
+                            <div className="p-2 m-3">Domain Name: {site.domain}</div>
+                            <div className="p-2 m-3">Website Manager: {site.siteManager}</div>
+                            <div className="p-2 m-3">Update Frequency: {site.updateFreq}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Brand Info</h3>
+                        <div className="border my-3">
+                            <div className="p-2 m-3">Purpose website: {brand.purpose}</div>
+                            <div className="p-2 m-3">Audience {brand.audience}</div>
+                            <div className="p-2 m-3">Competition: {brand.competition}</div>
+                            <div className="p-2 m-3">Website interaction with user: {brand.siteAction}</div>
+                            <div className="p-2 m-3">Tagline: {brand.tagLine}</div>
+                            <div className="p-2 m-3">What is great about the business: {brand.greatness}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>StyleInfo</h3>
+                        <div className="border my-3">
+                            <div className="p-2 m-3">Logo: {style.logo}</div>
+                            <div className="p-2 m-3">Style: {style.style}</div>
+                            <div className="p-2 m-3">Color palatte: {style.color}</div>
+                            <div className="p-2 m-3">Brand standards: {style.standards}</div>
+                            <div className="p-2 m-3">Print materials: {style.printMaterials}</div>
+                            <div className="p-2 m-3">Fonts: {style.fonts}</div>
+                            <div className="p-2 m-3">Photo services {style.photoService}</div>
+                            <div className="p-2 m-3">Websites for inspiration: {style.websites}</div>
+                            <div className="p-2 m-3">Likes and dislikes of these sites: {style.webLikesDis}</div>
+                            <div className="p-2 m-3">Features wanted in website: {style.features}</div>
                         </div>
                     </div>
                 </div>
 
                 : null}
 
-
+            {/* <div>
+                <h3></h3>
+                <div className="border my-3">
+                    <div className="p-2 m-3"> {}</div>
+                    <div className="p-2 m-3"> {}</div>
+                    <div className="p-2 m-3"> {}</div>
+                    <div className="p-2 m-3"> {}</div>
+                </div>
+            </div> */}
         </div>
     );
 }
