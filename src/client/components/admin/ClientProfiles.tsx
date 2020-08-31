@@ -57,6 +57,14 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
         highlight: '',
         qualifications: '',
         serviceProd: ''
+    });
+    const [seoContent, setSeoContent] = useState<SEOContent>({
+        knownFor: '',
+        found: '',
+        blog: '',
+        socialMedia: '',
+        emailCamp: '',
+        emailService: ''
     })
 
     const [show, setShow] = useState(false);
@@ -73,6 +81,8 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                 handleGet(`/api/brandInfo/${e}`, setBrand);
                 handleGet(`/api/styleInfo/${e}`, setStyle);
                 handleGet(`/api/landingInfo/${e}`, setLanding);
+                handleGet(`/api/aboutInfo/${e}`, setAbout);
+                handleGet(`/api/seoContentInfo/${e}`, setSeoContent);
             }
         } catch (e) {
             console.log(e)
@@ -158,8 +168,22 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                         </div>
                     </div>
                     <div>
-                        <h3></h3>
+                        <h3>About Info</h3>
                         <div className="border my-3">
+                            <div className="p-2 m-3">How they got started: {about.entryHistory}</div>
+                            <div className="p-2 m-3">About the client: {about.aboutYou}</div>
+                            <div className="p-2 m-3">Skills and experience: {about.expSkills}</div>
+                            <div className="p-2 m-3">How to show portfolio: {about.portStyle}</div>
+                            <div className="p-2 m-3">What to highlignt: {about.highlight}</div>
+                            <div className="p-2 m-3">Qualification: {about.qualifications}</div>
+                            <div className="p-2 m-3">Services and/or products: {about.serviceProd}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>SEO Content Info</h3>
+                        <div className="border my-3">
+                            <div className="p-2 m-3">Know {}</div>
+                            <div className="p-2 m-3"> {}</div>
                             <div className="p-2 m-3"> {}</div>
                             <div className="p-2 m-3"> {}</div>
                             <div className="p-2 m-3"> {}</div>

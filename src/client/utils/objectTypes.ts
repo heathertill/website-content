@@ -1,5 +1,4 @@
 export interface About {
-    userid: number,
     entryHistory: string,
     aboutYou: string,
     expSkills: string,
