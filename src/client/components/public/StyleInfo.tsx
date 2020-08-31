@@ -4,8 +4,6 @@ import { RouteComponentProps } from 'react-router-dom'
 import SubmitEdit from '../../utils/submitEdit';
 import { wayToGo, radioChecked } from '../../utils/formService';
 import Radio from '../../utils/radio';
-import StyleRadio from '../radio/StyleRadio';
-import PrintRadio from '../radio/PrintRadio';
 import { User, json } from '../../utils/api';
 
 interface Features { name: string }
@@ -84,7 +82,16 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
         } else {
             setLogo('no')
         }
-    }
+    };
+
+    const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let radioPhoto = e.target.value;
+        if (radioPhoto === 'yes') {
+            setPhotoService('yes')
+        } else {
+            setPhotoService('no')
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         let strFeatures = features.join(', ');
@@ -117,6 +124,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
             try {
                 let editStyleInfo = await json(`/api/styleInfo/${User.userid}`, 'PUT', body)
                 if (editStyleInfo) {
+                    console.log('body', body)
                     wayToGo('Style info has been edited');
                     history.push('/')
                     setTimeout(() => {
@@ -137,6 +145,7 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
     let logoMessage = 'Do you want to use a logo?';
     let printMessage = 'Do you have any established print material? Letterhead, brochures, event materials?';
     let styleMessage = 'Do you have company style/brand standards?';
+    let photoMessage = 'Do you need professional photography/videography services?';
 
     return (
         <section>
@@ -223,34 +232,26 @@ const StyleInfo: React.SFC<StyleInfoProps> = ({ history }) => {
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setColor(e.target.value)} ></textarea>
                 </div>
                 <div className="my-4">
-                    {/* <StyleRadio handlers={{ handleStyle }} /> */}
-                    <Radio handlers={{function: handleStyle}} />
+                    <Radio handlers={{function: handleStyle}} values={{message: styleMessage}} name={{radioName: 'styleRadio'}} />
                     {show ?
                         <div>
                             <label htmlFor="text">Please give a brief discription of your brand standards.</label>
                             <input type="text" className="form-control" value={standards}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFonts(e.target.value)} />
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStandards(e.target.value)} />
                         </div>
                         : null
                     }
                 </div>
                 <div className="my-4">
-                    <PrintRadio handlers={{ handlePrint }} />
+                    <Radio handlers={{function: handlePrint}} values={{message: printMessage}} name={{radioName: 'printRadio'}} />
                 </div>
                 <div className="my-4">
                     <label htmlFor="text">What font style are you looking for? What fonts do you currently use?</label>
                     <textarea rows={2} className="form-control" value={fonts}
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFonts(e.target.value)} ></textarea>
                 </div>
-                <div className="my-4">
-                    <div>Do you need professional photography/videography services?</div>
-                    <div className="form-check-inline" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhotoService(e.target.value)}>
-                        <input type="radio" className="form-check-input mx-2" value="yes" name="choice" />
-                        <label htmlFor="existingWeb" className="form-check-label">Yes</label>
-                        <input type="radio" className="form-check-input mx-2" value="no" name="choice" />
-                        <label htmlFor="existingWeb" className="form-check-label">No</label>
-                    </div>
-                </div>
+                <Radio handlers={{function: handlePhoto}} values={{message: photoMessage}} name={{radioName: 'photoRadio'}} />
+               
                 <div className="my-4">
                     <label htmlFor="text">List 3-5 websites you would like to use as inspiration for your own</label>
                     <textarea rows={8} className="form-control" value={websites}

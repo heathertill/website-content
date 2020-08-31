@@ -85,13 +85,14 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({ history }) => {
 
     return (
         <section>
-            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
-                <div className="my-3">
-                    <h1>Contact Information</h1>
-                    <div className="mt-3 mb-5">
-                        <h3>This is the information that will appear on your website.</h3>
-                    </div>
+            <div className="">
+                <h1 className="mb-3">Contact Information</h1>
+                <div className="mt-3 mb-5">
+                    <h3>This is the information that will appear on your website.</h3>
                 </div>
+            </div>
+            <form className="form-group mx-4" onSubmit={(e) => handleSubmit(e)}>
+
                 <div className="my-3" >
                     <label htmlFor="address">Physical Address</label>
                     <textarea className="form-control" rows={4} value={address} placeholder={address}

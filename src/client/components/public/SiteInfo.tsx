@@ -94,8 +94,8 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             setShow(true);
             setShowDom(false);
         } else {
-            setWebName('');
-            setHostName('');
+            setWebName('no');
+            setHostName('no');
             setShowDom(true);
             setShow(false);
         }
@@ -107,7 +107,7 @@ const SiteInfo: React.SFC<SiteInfoProps> = ({ history }) => {
             setShowDomName(true)
         } else {
             setShowDomName(false)
-            setDomain('')
+            setDomain('no')
         }
     }
 

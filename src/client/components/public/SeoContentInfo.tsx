@@ -20,7 +20,7 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
     const [showSM, setShowSM] = useState(false);
     const [showEmail, setShowEmail] = useState(false);
 
-    const blogMessage = 'Will you maintain an active blog with content relebant to your business?';
+    const blogMessage = 'Will you maintain an active blog with content relevant to your business?';
     const mediaMessage = 'Will you maintain social media accounts?';
     const emailMessage = 'Do you currently utilize an email service such as Mail Chimp or Constant Contact?';
     const campMessage = 'Do you plan to utilize an active email campaign to existing clients and prospects?';
@@ -123,7 +123,8 @@ const SeoContentInfo: React.SFC<SeoContentInfoProps> = ({ history }) => {
 
     return (
         <section>
-            <form className="form-group" onSubmit={(e) => handleSubmit(e)}>
+            <h1 className="mb-3">SEO Content Information</h1>
+            <form className="form-group mx-4" onSubmit={(e) => handleSubmit(e)}>
                 <div className="my-3">
                     <label htmlFor="knownFor">What do you want to be associated with? Known for?</label>
                     <textarea className="form-control" rows={5} value={knownFor} placeholder={knownFor}

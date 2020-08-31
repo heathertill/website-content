@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+
 export interface RadioProps {
     handlers: {
         function: any
@@ -12,7 +13,7 @@ export interface RadioProps {
     }
 }
 
-const Radio: React.SFC<RadioProps> = ({ handlers, values, name }) => {
+const Radio: React.SFC<RadioProps> = () => {
     return (
         <section>
             <div>{values.message}</div>
@@ -27,3 +28,4 @@ const Radio: React.SFC<RadioProps> = ({ handlers, values, name }) => {
 }
 
 export default Radio;
+
