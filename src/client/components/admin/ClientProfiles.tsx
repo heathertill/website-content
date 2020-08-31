@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { handleGet } from '../../utils/formService';
 import { json } from '../../utils/api';
 import { Client, Site, Brand, Style, Landing, About, SEOContent, Contact } from '../../utils/objectTypes';
+import { updateSetAccessor } from 'typescript';
 
 export interface ClientProfilesProps extends RouteComponentProps { }
 
@@ -41,6 +42,21 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
         websites: '',
         webLikesDis: '',
         features: ''
+    });
+    const [landing, setLanding] = useState<Landing>({
+        siteEntry: '',
+        branding: '',
+        callToAction: '',
+        simWebFunc: ''
+    });
+    const [about, setAbout] = useState<About>({
+        entryHistory: '',
+        aboutYou: '',
+        expSkills: '',
+        portStyle: '',
+        highlight: '',
+        qualifications: '',
+        serviceProd: ''
     })
 
     const [show, setShow] = useState(false);
@@ -56,6 +72,7 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                 handleGet(`/api/siteInfo/${e}`, setSite);
                 handleGet(`/api/brandInfo/${e}`, setBrand);
                 handleGet(`/api/styleInfo/${e}`, setStyle);
+                handleGet(`/api/landingInfo/${e}`, setLanding);
             }
         } catch (e) {
             console.log(e)
@@ -131,6 +148,25 @@ const ClientProfiles: React.SFC<ClientProfilesProps> = () => {
                             <div className="p-2 m-3">Features wanted in website: {style.features}</div>
                         </div>
                     </div>
+                    <div>
+                        <h3>Landing Info</h3>
+                        <div className="border my-3">
+                            <div className="p-2 m-3">Site entry: {landing.siteEntry}</div>
+                            <div className="p-2 m-3">Branding images: {landing.branding}</div>
+                            <div className="p-2 m-3">Call to action: {landing.callToAction}</div>
+                            <div className="p-2 m-3">Website navigation liked: {landing.simWebFunc}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3></h3>
+                        <div className="border my-3">
+                            <div className="p-2 m-3"> {}</div>
+                            <div className="p-2 m-3"> {}</div>
+                            <div className="p-2 m-3"> {}</div>
+                            <div className="p-2 m-3"> {}</div>
+                        </div>
+                    </div>
+
                 </div>
 
                 : null}

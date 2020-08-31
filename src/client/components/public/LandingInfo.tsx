@@ -89,7 +89,7 @@ const LandingInfo: React.SFC<LandingInfoProps> = ({ history }) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCallToAction(e.target.value)} />
                 </div>
                 <div className="my-3">
-                    <label htmlFor="simWebFunc" >Have you seen any particular functions you like on another website? If so, list the url and explain what you like about it below.</label>
+                    <label htmlFor="simWebFunc" >Have you seen any particular website navigation features you like on other websites?  If so, list the url and explain what you like about it below.</label>
                     <input className="form-control" type="text" value={simWebFunc} placeholder={simWebFunc}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSimWebFunc(e.target.value)} />
                 </div>
