@@ -71,7 +71,6 @@ const ContactInfo: React.SFC<ContactInfoProps> = ({ history }) => {
             try {
                 let editContact = await json(`/api/contactInfo/${User.userid}`, 'PUT', body);
                 if (editContact) {
-                    console.log('editContact')
                     wayToGo('Contact info has been edited')
                     history.push('/');
                     setTimeout(() => {
